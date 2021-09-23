@@ -6,3 +6,5 @@ pyvenv.cfg
 # Jetbrains IDE files
 .idea/
 
+# Python bytecode
+*.pyc
