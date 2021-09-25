@@ -13,7 +13,7 @@ def prepare_workspace():
 def main():
     prepare_workspace()
     app = QApplication(sys.argv)
-    window = MainWindow()
+    window = MainWindow(app)
     window.show()
     sys.exit(app.exec())
 
