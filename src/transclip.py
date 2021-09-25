@@ -2,12 +2,12 @@ import os
 import sys
 from PyQt6.QtWidgets import QApplication
 from widgets import MainWindow
+from util import WORKSPACE
 
 
 def prepare_workspace():
-    static_home = str(__file__).replace("/transclip.py", "")
-    if os.getcwd() != static_home:
-        os.chdir(static_home)
+    if os.getcwd() != WORKSPACE:
+        os.chdir(WORKSPACE)
 
 
 def main():
