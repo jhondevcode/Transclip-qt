@@ -1,8 +1,9 @@
 import datetime
 import logging
 import os
+from util import WORKSPACE
 
-LOG_DIR = os.path.join(os.getcwd(), "logs")
+LOG_DIR = os.path.join(WORKSPACE, "logs")
 
 if not os.path.isdir(LOG_DIR):
     os.mkdir(LOG_DIR)
