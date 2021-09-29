@@ -1,11 +1,14 @@
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtGui import QClipboard
+
+
 def copy(content: str):
-    pass
+    QApplication.clipboard().setText(content, QClipboard.Mode.Clipboard)
 
 
 def paste() -> str:
-    pass
+    return QApplication.clipboard().text(QClipboard.Mode.Clipboard)
 
 
 def clear():
-    pass
-
+    QApplication.clipboard().clear(QClipboard.Mode.Clipboard)
