@@ -9,7 +9,7 @@ if not os.path.isdir(LOG_DIR):
     os.mkdir(LOG_DIR)
 
 log_file = os.path.join(LOG_DIR, f"log-{datetime.datetime.now().date()}.log")
-logging.basicConfig(filename=log_file, format='%(asctime)s %(message)s', filemode='a')
+logging.basicConfig(filename=log_file, format="%(asctime)s %(message)s", filemode="a")
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
