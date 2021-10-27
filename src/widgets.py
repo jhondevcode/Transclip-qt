@@ -1,11 +1,13 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMenuBar, QMessageBox
+from PyQt6.QtWidgets import QDialog, QTextEdit, QPushButton
+from PyQt6.QtWidgets import QHBoxLayout, QVBoxLayout
 from PyQt6.QtGui import QIcon, QDesktopServices, QCloseEvent
 from PyQt6.QtCore import QUrl
 
 from constant import PROGRAM_NAME, PROGRAM_VERSION, PROGRAM_URL
 from impl import Requester
 from util import browse
-from logger import LOG_DIR, log_file
+from logger import LOG_DIR, log_file, log_file_name
 
 
 class MainWindow(QMainWindow, Requester):
@@ -95,7 +97,7 @@ class MenuBar(QMenuBar):
 
         self.show_log_action = self.logs_menu.addAction("&Show log")
         self.show_log_action.setShortcut("Shift+L")
-        self.show_log_action.triggered.connect(lambda: browse(log_file))
+        self.show_log_action.triggered.connect(lambda: LogViewer(self.parent).exec())
 
         self.open_logdir_action = self.logs_menu.addAction("&Open logs dir")
         self.open_logdir_action.setShortcut("Shift+O")
@@ -116,3 +118,36 @@ class MenuBar(QMenuBar):
         self.help_menu.addSeparator()
         
         self.about_action = self.help_menu.addAction(QIcon("resources/svg/about_icon.svg"), "&About")
+
+
+class LogViewer(QDialog):
+    
+    def __init__(self, parent):
+        super(LogViewer, self).__init__(parent)
+        self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
+        self.init_ui()
+        self.init_buttons()
+        self.load_log_content()
+
+    def init_ui(self):
+        self.setWindowTitle(log_file_name)
+        self.resize(400, 300)
+        self.editor = QTextEdit(self)
+        self.layout.addWidget(self.editor)
+
+    def init_buttons(self):
+        buttons_layout = QHBoxLayout()
+        clear_button = QPushButton("Clear")
+        clear_button.clicked.connect(lambda: self.editor.clear())
+        buttons_layout.addWidget(clear_button)
+
+        close_button = QPushButton("Close")
+        close_button.clicked.connect(lambda: self.close())
+        buttons_layout.addWidget(close_button)
+        self.layout.addLayout(buttons_layout)
+
+    def load_log_content(self):
+        log = open(log_file, mode="r", encoding="utf-8")
+        self.editor.setPlainText(log.read())
+        log.close()
