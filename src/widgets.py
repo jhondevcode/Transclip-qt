@@ -60,39 +60,39 @@ class MenuBar(QMenuBar):
 
     def init_file_menu(self):
         self.file_menu = self.addMenu("&File")
-        self.open_action = self.file_menu.addAction("&Open")
+        self.open_action = self.file_menu.addAction(QIcon("resources/svg/open_icon.svg"), "&Open")
         self.open_action.setShortcut("Ctrl+O")
-        self.save_action = self.file_menu.addAction("&Save")
+        self.save_action = self.file_menu.addAction(QIcon("resources/svg/save_icon.svg"), "&Save")
         self.save_action.setShortcut("Ctrl+S")
         self.file_menu.addSeparator()
-        self.exit_action = self.file_menu.addAction("&Exit")
+        self.exit_action = self.file_menu.addAction(QIcon("resources/svg/exit_icon.svg"), "&Exit")
         self.exit_action.setShortcut("Ctrl+Q")
 
     def init_run_menu(self):
         self.run_menu = self.addMenu("&Run")
-        self.start_monitor_action = self.run_menu.addAction("St&art monitor")
+        self.start_monitor_action = self.run_menu.addAction(QIcon("resources/svg/start_icon.svg"), "St&art monitor")
         self.start_monitor_action.setShortcut("Ctrl+Shift+A")
-        self.stop_monitor_action = self.run_menu.addAction("St&op monitor")
+        self.stop_monitor_action = self.run_menu.addAction(QIcon("resources/svg/stop_icon.svg"), "St&op monitor")
         self.stop_monitor_action.setShortcut("Ctrl+Shift+O")
 
     def init_tools_menu(self):
         self.tools_menu = self.addMenu("&Tools")
-        self.logs_menu = self.tools_menu.addMenu("&Logs")
+        self.logs_menu = self.tools_menu.addMenu(QIcon("resources/svg/log_icon.svg"), "&Logs")
         self.show_log_action = self.logs_menu.addAction("&Show log")
         self.show_log_action.setShortcut("Shift+L")
         self.open_logdir_action = self.logs_menu.addAction("&Open logs dir")
         self.open_logdir_action.setShortcut("Shift+O")
         self.clear_logs_action = self.logs_menu.addAction("&Clear old logs")
         self.clear_logs_action.setShortcut("Shift+D")
-        self.setting_action = self.tools_menu.addAction("&Settings")
+        self.setting_action = self.tools_menu.addAction(QIcon("resources/svg/settings_icon.svg"), "&Settings")
         self.setting_action.setShortcut("Ctrl+Shift+S")
 
     def init_help_menu(self):
         self.help_menu = self.addMenu("&Help")
-        self.help_action = self.help_menu.addAction("H&elp")
+        self.help_action = self.help_menu.addAction(QIcon("resources/svg/help_icon.svg"), "H&elp")
 
-        self.github_action = self.help_menu.addAction("&Github")
+        self.github_action = self.help_menu.addAction(QIcon("resources/svg/github_icon.svg"), "&Github")
         self.github_action.triggered.connect(lambda : browse(PROGRAM_URL))
         self.help_menu.addSeparator()
         
-        self.about_action = self.help_menu.addAction("&About")
+        self.about_action = self.help_menu.addAction(QIcon("resources/svg/about_icon.svg"), "&About")
