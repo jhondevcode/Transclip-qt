@@ -8,3 +8,6 @@ pyvenv.cfg
 
 # Python bytecode
 *.pyc
+
+# Visual studio code files
+.vscode/
