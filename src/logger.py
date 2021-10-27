@@ -1,9 +1,9 @@
 import datetime
 import logging
 import os
-from util import WORKSPACE
+from homedir import get_home_path
 
-LOG_DIR = os.path.join(WORKSPACE, "logs")
+LOG_DIR = os.path.join(get_home_path(), "logs")
 
 if not os.path.isdir(LOG_DIR):
     os.mkdir(LOG_DIR)
