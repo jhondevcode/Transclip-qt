@@ -4,10 +4,14 @@ from PyQt6.QtWidgets import QHBoxLayout, QVBoxLayout
 from PyQt6.QtGui import QIcon, QDesktopServices, QCloseEvent
 from PyQt6.QtCore import QUrl
 
+from homedir import get_home_path
 from constant import PROGRAM_NAME, PROGRAM_VERSION, PROGRAM_URL
+from os import listdir, remove
+from os.path import isfile, join
 from impl import Requester
 from util import browse
-from logger import LOG_DIR, log_file, log_file_name
+from typing import List
+from logger import logger, LOG_DIR, log_file, log_file_name
 
 
 class MainWindow(QMainWindow, Requester):
@@ -105,6 +109,7 @@ class MenuBar(QMenuBar):
 
         self.clear_logs_action = self.logs_menu.addAction("&Clear old logs")
         self.clear_logs_action.setShortcut("Shift+D")
+        self.clear_logs_action.triggered.connect(self.__delete_old_logs)
 
         self.setting_action = self.tools_menu.addAction(QIcon("resources/svg/settings_icon.svg"), "&Settings")
         self.setting_action.setShortcut("Ctrl+Shift+S")
@@ -118,6 +123,26 @@ class MenuBar(QMenuBar):
         self.help_menu.addSeparator()
         
         self.about_action = self.help_menu.addAction(QIcon("resources/svg/about_icon.svg"), "&About")
+
+    def __delete_old_logs(self):
+        files: List[str] = listdir(LOG_DIR)
+        if len(files) > 1:
+            quit_message = QMessageBox.question(
+                self.parent, "Confirm delete", "Are you sure you want to delete the old log files?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.Yes)
+            if quit_message == QMessageBox.StandardButton.Yes:
+                try:
+                    for fls in files:
+                        if fls is not log_file_name:
+                            to_remove = join(LOG_DIR, fls)
+                            remove(to_remove)
+                            logger.warn(f"Deleting {to_remove}")
+                    QMessageBox.information(self.parent, "Success", "The old records have been erased.", QMessageBox.StandardButton.Ok)
+                except Exception as ex:
+                    QMessageBox.critical(self.parent, "Error", str(ex), QMessageBox.StandardButton.Ok)
+        else:
+            QMessageBox.information(self.parent, PROGRAM_NAME, "No old log files found.", QMessageBox.StandardButton.Ok)
 
 
 class LogViewer(QDialog):
