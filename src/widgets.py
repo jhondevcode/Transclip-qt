@@ -134,8 +134,8 @@ class MenuBar(QMenuBar):
             if quit_message == QMessageBox.StandardButton.Yes:
                 try:
                     for fls in files:
-                        if fls is not log_file_name:
-                            to_remove = join(LOG_DIR, fls)
+                        to_remove = join(LOG_DIR, fls)
+                        if fls is not log_file_name and isfile(to_remove):
                             remove(to_remove)
                             logger.warn(f"Deleting {to_remove}")
                     QMessageBox.information(self.parent, "Success", "The old records have been erased.", QMessageBox.StandardButton.Ok)
