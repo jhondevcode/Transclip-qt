@@ -24,7 +24,10 @@ def get_home_path() -> str:
     """
         This function returns the path of the working directory for the program.
     """
-    return join(Path().home(), ".tcpl")
+    home_path = join(Path().home(), ".tcpl")
+    if not isdir(home_path):
+        mkdir(home_path)
+    return home_path
 
 
 def makedir(path: str) -> str:
