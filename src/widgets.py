@@ -90,9 +90,9 @@ class MenuBar(QMenuBar):
     def init_run_menu(self):
         self.run_menu = self.addMenu("&Run")
         self.start_monitor_action = self.run_menu.addAction(QIcon("resources/svg/start_icon.svg"), "St&art monitor")
-        self.start_monitor_action.setShortcut("Ctrl+Shift+A")
+        self.start_monitor_action.setShortcut("Ctrl+Shift+T")
         self.stop_monitor_action = self.run_menu.addAction(QIcon("resources/svg/stop_icon.svg"), "St&op monitor")
-        self.stop_monitor_action.setShortcut("Ctrl+Shift+O")
+        self.stop_monitor_action.setShortcut("Ctrl+Shift+P")
 
     def init_tools_menu(self):
         self.tools_menu = self.addMenu("&Tools")
@@ -123,12 +123,15 @@ class MenuBar(QMenuBar):
     def init_help_menu(self):
         self.help_menu = self.addMenu("&Help")
         self.help_action = self.help_menu.addAction(QIcon("resources/svg/help_icon.svg"), "H&elp")
+        self.help_action.setShortcut("Ctrl+Shift+H")
 
         self.github_action = self.help_menu.addAction(QIcon("resources/svg/github_icon.svg"), "&Github")
         self.github_action.triggered.connect(lambda: browse(PROGRAM_URL))
+        self.github_action.setShortcut("Ctrl+Shift+G")
         self.help_menu.addSeparator()
         
         self.about_action = self.help_menu.addAction(QIcon("resources/svg/about_icon.svg"), "&About")
+        self.about_action.setShortcut("Ctrl+Shift+A")
 
     def __delete_old_logs(self):
         files: List[str] = listdir(LOG_DIR)
