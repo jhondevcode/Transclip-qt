@@ -36,14 +36,14 @@ class TextDialog(QDialog):
         buttons_layout = QHBoxLayout()
         self.clear_button = QPushButton("Clear")
         self.clear_button.clicked.connect(lambda: self.editor.clear())
+        self.clear_button.setEnabled(False)
         buttons_layout.addWidget(self.clear_button)
 
         close_button = QPushButton("Close")
         close_button.clicked.connect(self.close)
         buttons_layout.addWidget(close_button)
         self.layout.addLayout(buttons_layout)
-        if self.with_buttons:
-            self.editor.textChanged.connect(self.change_event)
+        self.editor.textChanged.connect(self.change_event)
         self.load_file_content()
 
     def change_event(self):
