@@ -26,5 +26,7 @@
   "CLEAR_LOG_DIALOG_NOT_FOUND": "No se encontraron archivos de registro antiguos",
   "CLEAR_LOG_DIALOG_SUCCESS": "Los registros antiguos se han borrado",
 
-  "SUCCESSFUL_TITLE": "Operación exitosa"
+  "SUCCESSFUL_TITLE": "Operación exitosa",
+  "CLEAR": "Limpiar",
+  "CLOSE": "Cerrar"
 }

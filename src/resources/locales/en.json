@@ -26,5 +26,7 @@
   "CLEAR_LOG_DIALOG_NOT_FOUND": "No old log files found",
   "CLEAR_LOG_DIALOG_SUCCESS": "The old logs have been erased.",
 
-  "SUCCESSFUL_TITLE": "Successful operation"
+  "SUCCESSFUL_TITLE": "Successful operation",
+  "CLEAR": "Clear",
+  "CLOSE": "Close"
 }
