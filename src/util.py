@@ -7,7 +7,6 @@ from json import load
 class LocaleUtil:
 
     def __init__(self):
-        self.dict = {}
         file_path = f"resources/locales/{config.get('locale')}"
         file = open(file_path, mode="r", encoding="utf-8")
         self.dictionary = load(file)
