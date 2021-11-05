@@ -25,7 +25,7 @@ class Configuration(AbstractLoader):
                                'NULL, PRIMARY KEY("id" AUTOINCREMENT))')
                 self.load_default()
                 for key, value in self.__config.items():
-                    cursor.execute(f'INSERT INTO "config" (key, value) VALUES ({key}, {value})')
+                    cursor.execute(f'INSERT INTO "config" (key, value) VALUES ("{key}", "{value}")')
                 connection.commit()
                 cursor.close()
                 connection.close()
