@@ -12,6 +12,7 @@ from typing import List
 from logger import logger, LOG_DIR, log_file, log_file_name
 from clipboard import clear
 from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog
+from util import locale
 
 
 class MainWindow(QMainWindow, Requester):
@@ -55,7 +56,7 @@ class MainWindow(QMainWindow, Requester):
         pass
 
     def closeEvent(self, event: QCloseEvent) -> None:
-        quit_message = show_question_dialog(self, "Confirm exit", "Are you sure you want to exit?")
+        quit_message = show_question_dialog(self, locale.value("EXIT_DIALOG_TITLE"), locale.value("EXIT_DIALOG_MESSAGE"))
         if quit_message == QMessageBox.StandardButton.Yes:
             event.accept()
         else:
@@ -73,68 +74,68 @@ class MenuBar(QMenuBar):
         self.init_help_menu()
 
     def init_file_menu(self):
-        self.file_menu = self.addMenu("&File")
-        self.open_action = self.file_menu.addAction(QIcon("resources/svg/open_icon.svg"), "&Open")
+        self.file_menu = self.addMenu(locale.value("MENU_BAR_FILE"))
+        self.open_action = self.file_menu.addAction(QIcon("resources/svg/open_icon.svg"), locale.value("MENU_BAR_FILE_OPEN"))
         self.open_action.setShortcut("Ctrl+O")
 
-        self.save_action = self.file_menu.addAction(QIcon("resources/svg/save_icon.svg"), "&Save")
+        self.save_action = self.file_menu.addAction(QIcon("resources/svg/save_icon.svg"), locale.value("MENU_BAR_FILE_SAVE"))
         self.save_action.setShortcut("Ctrl+S")
         self.file_menu.addSeparator()
 
-        self.exit_action = self.file_menu.addAction(QIcon("resources/svg/exit_icon.svg"), "&Exit")
+        self.exit_action = self.file_menu.addAction(QIcon("resources/svg/exit_icon.svg"), locale.value("MENU_BAR_FILE_EXIT"))
         self.exit_action.setShortcut("Ctrl+Q")
         self.exit_action.triggered.connect(self.parent.close)
 
     def init_run_menu(self):
-        self.run_menu = self.addMenu("&Run")
-        self.start_monitor_action = self.run_menu.addAction(QIcon("resources/svg/start_icon.svg"), "St&art monitor")
+        self.run_menu = self.addMenu(locale.value("MENU_BAR_RUN"))
+        self.start_monitor_action = self.run_menu.addAction(QIcon("resources/svg/start_icon.svg"), locale.value("MENU_BAR_RUN_START_MONITOR"))
         self.start_monitor_action.setShortcut("Ctrl+Shift+T")
-        self.stop_monitor_action = self.run_menu.addAction(QIcon("resources/svg/stop_icon.svg"), "St&op monitor")
+        self.stop_monitor_action = self.run_menu.addAction(QIcon("resources/svg/stop_icon.svg"), locale.value("MENU_BAR_RUN_STOP_MONITOR"))
         self.stop_monitor_action.setShortcut("Ctrl+Shift+P")
 
     def init_tools_menu(self):
-        self.tools_menu = self.addMenu("&Tools")
-        self.logs_menu = self.tools_menu.addMenu(QIcon("resources/svg/log_icon.svg"), "&Logs")
+        self.tools_menu = self.addMenu(locale.value("MENU_BAR_TOOLS"))
+        self.logs_menu = self.tools_menu.addMenu(QIcon("resources/svg/log_icon.svg"), locale.value("MENU_BAR_TOOLS_LOGS"))
 
-        self.show_log_action = self.logs_menu.addAction("&Show log")
+        self.show_log_action = self.logs_menu.addAction(locale.value("MENU_BAR_TOOLS_LOGS_SHOW"))
         self.show_log_action.setShortcut("Shift+L")
         self.show_log_action.triggered.connect(lambda: show_text_dialog(self.parent, log_file, log_file_name, True))
 
-        self.open_logdir_action = self.logs_menu.addAction("&Open logs dir")
+        self.open_logdir_action = self.logs_menu.addAction(locale.value("MENU_BAR_TOOLS_LOGS_DIR"))
         self.open_logdir_action.setShortcut("Shift+O")
         self.open_logdir_action.triggered.connect(lambda: browse(LOG_DIR))
 
-        self.clear_logs_action = self.logs_menu.addAction("&Clear old logs")
+        self.clear_logs_action = self.logs_menu.addAction(locale.value("MENU_BAR_TOOLS_LOGS_CLEAR"))
         self.clear_logs_action.setShortcut("Shift+D")
         self.clear_logs_action.triggered.connect(self.__delete_old_logs)
 
-        self.clipboard_menu = self.tools_menu.addMenu("&Clipboard")
+        self.clipboard_menu = self.tools_menu.addMenu(locale.value("MENU_BAR_TOOLS_CLIPBOARD"))
 
-        self.clipboard_history_action = self.clipboard_menu.addAction("Clipboard &history")
+        self.clipboard_history_action = self.clipboard_menu.addAction(locale.value("MENU_BAR_TOOLS_CLIPBOARD_HISTORY"))
 
-        self.clipboard_clear_action = self.clipboard_menu.addAction("Cl&ear clipboard")
+        self.clipboard_clear_action = self.clipboard_menu.addAction(locale.value("MENU_BAR_TOOLS_CLIPBOARD_CLEAR"))
         self.clipboard_clear_action.triggered.connect(clear)
 
-        self.setting_action = self.tools_menu.addAction(QIcon("resources/svg/settings_icon.svg"), "&Settings")
+        self.setting_action = self.tools_menu.addAction(QIcon("resources/svg/settings_icon.svg"), locale.value("MENU_BAR_TOOLS_SETTINGS"))
         self.setting_action.setShortcut("Ctrl+Shift+S")
 
     def init_help_menu(self):
         self.help_menu = self.addMenu("&Help")
-        self.help_action = self.help_menu.addAction(QIcon("resources/svg/help_icon.svg"), "H&elp")
+        self.help_action = self.help_menu.addAction(QIcon("resources/svg/help_icon.svg"), locale.value("MENU_BAR_HELP"))
         self.help_action.setShortcut("Ctrl+Shift+H")
 
-        self.github_action = self.help_menu.addAction(QIcon("resources/svg/github_icon.svg"), "&Github")
+        self.github_action = self.help_menu.addAction(QIcon("resources/svg/github_icon.svg"), locale.value("MENU_BAR_HELP_GITHUB"))
         self.github_action.triggered.connect(lambda: browse(PROGRAM_URL))
         self.github_action.setShortcut("Ctrl+Shift+G")
         self.help_menu.addSeparator()
         
-        self.about_action = self.help_menu.addAction(QIcon("resources/svg/about_icon.svg"), "&About")
+        self.about_action = self.help_menu.addAction(QIcon("resources/svg/about_icon.svg"), locale.value("MENU_BAR_HELP_ABOUT"))
         self.about_action.setShortcut("Ctrl+Shift+A")
 
     def __delete_old_logs(self):
         files: List[str] = listdir(LOG_DIR)
         if len(files) > 1:
-            quit_message = show_question_dialog(self.parent, "Confirm delete", "Are you sure you want to delete the old log files?")
+            quit_message = show_question_dialog(self.parent, locale.value("CLEAR_LOG_DIALOG_TITLE"), locale.value("CLEAR_LOG_DIALOG_MESSAGE"))
             if quit_message == QMessageBox.StandardButton.Yes:
                 try:
                     for fls in files:
@@ -142,9 +143,9 @@ class MenuBar(QMenuBar):
                         if fls is not log_file_name and isfile(to_remove):
                             remove(to_remove)
                             logger.warn(f"Deleting {to_remove}")
-                    show_info_dialog(self.parent, "Success", "The old records have been erased.")
+                    show_info_dialog(self.parent, locale.value("SUCCESSFUL_TITLE"), locale.value("CLEAR_LOG_DIALOG_SUCCESS"))
                 except Exception as ex:
                     logger.error(ex)
                     show_error_dialog(self.parent, "Error", str(ex))
         else:
-            show_info_dialog(self.parent, PROGRAM_NAME, "No old log files found.")
+            show_info_dialog(self.parent, PROGRAM_NAME, locale.value("CLEAR_LOG_DIALOG_NOT_FOUND"))
