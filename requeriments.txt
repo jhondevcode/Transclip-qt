@@ -4,9 +4,9 @@ charset-normalizer==2.0.7
 click==8.0.3
 deep-translator==1.5.4
 idna==3.3
-PyQt6==6.2.0
-PyQt6-Qt6==6.2.0
+PyQt6==6.2.1
+PyQt6-Qt6==6.2.1
 PyQt6-sip==13.1.0
 requests==2.26.0
-soupsieve==2.2.1
+soupsieve==2.3
 urllib3==1.26.7
