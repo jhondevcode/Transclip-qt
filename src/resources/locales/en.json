@@ -25,6 +25,13 @@
   "CLEAR_LOG_DIALOG_MESSAGE": "Are you sure you want to delete the old log files?",
   "CLEAR_LOG_DIALOG_NOT_FOUND": "No old log files found",
   "CLEAR_LOG_DIALOG_SUCCESS": "The old logs have been erased.",
+  "STATE_LABEL_TEXT": "State",
+  "STATE_LABEL_ON": "connected",
+  "STATE_LABEL_OFF": "disconnected",
+  "SOURCE_LABEL_TEXT": "Source",
+  "TARGET_LABEL_TEXT": "Target",
+  "WORDS_LABEL_TEXT": "Words",
+  "DELAY_LABEL_TEXT": "Delay",
 
   "SUCCESSFUL_TITLE": "Successful operation",
   "CLEAR": "Clear",

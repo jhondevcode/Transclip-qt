@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMenuBar, QMessageBox
-from PyQt6.QtWidgets import QDialog, QTextEdit, QPushButton, QLabel
+from PyQt6.QtWidgets import QDialog, QTextEdit, QPushButton, QLabel, QWidget
 from PyQt6.QtWidgets import QHBoxLayout, QVBoxLayout
 from PyQt6.QtGui import QIcon, QCloseEvent, QFont, QPixmap
 
@@ -13,6 +13,7 @@ from logger import logger, LOG_DIR, log_file, log_file_name
 from clipboard import clear
 from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog
 from util import locale
+from config import config
 
 
 class MainWindow(QMainWindow, Requester):
@@ -43,17 +44,26 @@ class MainWindow(QMainWindow, Requester):
     def init_ui(self):
         self.init_menu_bar()
         self.init_content()
-        self.init_menu_bar()
+        self.init_status_bar()
 
     def init_menu_bar(self):
         self.menu_bar = MenuBar(self)
         self.setMenuBar(self.menu_bar)
 
     def init_content(self):
-        pass
+        self.central_widget = QWidget(self)
+        self.setCentralWidget(self.central_widget)
+        self.central_layout = QVBoxLayout()
+        self.central_widget.setLayout(self.central_layout)
 
     def init_status_bar(self):
-        pass
+        self.state_bar = StateBar()
+        self.central_layout.addLayout(self.state_bar)
+        self.state_bar.set_state(locale.value("STATE_LABEL_OFF"))
+        self.state_bar.set_source(config.get("source"))
+        self.state_bar.set_target(config.get("target"))
+        self.state_bar.set_words(0)
+        self.state_bar.set_delay(float(config.get("interval")))
 
     def closeEvent(self, event: QCloseEvent) -> None:
         quit_message = show_question_dialog(self, locale.value("EXIT_DIALOG_TITLE"), locale.value("EXIT_DIALOG_MESSAGE"))
@@ -149,3 +159,41 @@ class MenuBar(QMenuBar):
                     show_error_dialog(self.parent, "Error", str(ex))
         else:
             show_info_dialog(self.parent, PROGRAM_NAME, locale.value("CLEAR_LOG_DIALOG_NOT_FOUND"))
+
+
+class StateBar(QHBoxLayout):
+
+    def __init__(self):
+        super(StateBar, self).__init__()
+        self.load_ui()
+
+    def load_ui(self):
+        self.state_label = QLabel()
+        self.addWidget(self.state_label)
+
+        self.source_label = QLabel()
+        self.addWidget(self.source_label)
+
+        self.target_label = QLabel()
+        self.addWidget(self.target_label)
+
+        self.words_label = QLabel()
+        self.addWidget(self.words_label)
+
+        self.delay_label = QLabel()
+        self.addWidget(self.delay_label)
+
+    def set_state(self, state: str):
+        self.state_label.setText(f'{locale.value("STATE_LABEL_TEXT")}: {state}')
+
+    def set_source(self, source: str):
+        self.source_label.setText(f'{locale.value("SOURCE_LABEL_TEXT")}: {source}')
+
+    def set_target(self, target: str):
+        self.target_label.setText(f'{locale.value("TARGET_LABEL_TEXT")}: {target}')
+
+    def set_words(self, words: int):
+        self.words_label.setText(f'{locale.value("WORDS_LABEL_TEXT")}: {words}')
+
+    def set_delay(self, delay: float):
+        self.delay_label.setText(f'{locale.value("DELAY_LABEL_TEXT")}: {delay}')
