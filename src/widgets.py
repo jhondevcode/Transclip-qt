@@ -11,6 +11,7 @@ from util import browse
 from typing import List
 from logger import logger, LOG_DIR, log_file, log_file_name
 from clipboard import clear
+from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog
 
 
 class MainWindow(QMainWindow, Requester):
@@ -54,10 +55,7 @@ class MainWindow(QMainWindow, Requester):
         pass
 
     def closeEvent(self, event: QCloseEvent) -> None:
-        quit_message = QMessageBox.question(
-            self, "Confirm exit", "Are you sure you want to exit?",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            QMessageBox.StandardButton.Yes)
+        quit_message = show_question_dialog(self, "Confirm exit", "Are you sure you want to exit?")
         if quit_message == QMessageBox.StandardButton.Yes:
             event.accept()
         else:
@@ -100,7 +98,7 @@ class MenuBar(QMenuBar):
 
         self.show_log_action = self.logs_menu.addAction("&Show log")
         self.show_log_action.setShortcut("Shift+L")
-        self.show_log_action.triggered.connect(lambda: LogViewer(self.parent).exec())
+        self.show_log_action.triggered.connect(lambda: show_text_dialog(self.parent, log_file, log_file_name, True))
 
         self.open_logdir_action = self.logs_menu.addAction("&Open logs dir")
         self.open_logdir_action.setShortcut("Shift+O")
@@ -136,10 +134,7 @@ class MenuBar(QMenuBar):
     def __delete_old_logs(self):
         files: List[str] = listdir(LOG_DIR)
         if len(files) > 1:
-            quit_message = QMessageBox.question(
-                self.parent, "Confirm delete", "Are you sure you want to delete the old log files?",
-                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-                QMessageBox.StandardButton.Yes)
+            quit_message = show_question_dialog(self.parent, "Confirm delete", "Are you sure you want to delete the old log files?")
             if quit_message == QMessageBox.StandardButton.Yes:
                 try:
                     for fls in files:
@@ -147,42 +142,9 @@ class MenuBar(QMenuBar):
                         if fls is not log_file_name and isfile(to_remove):
                             remove(to_remove)
                             logger.warn(f"Deleting {to_remove}")
-                    QMessageBox.information(self.parent, "Success", "The old records have been erased.", QMessageBox.StandardButton.Ok)
+                    show_info_dialog(self.parent, "Success", "The old records have been erased.")
                 except Exception as ex:
                     logger.error(ex)
-                    QMessageBox.critical(self.parent, "Error", str(ex), QMessageBox.StandardButton.Ok)
+                    show_error_dialog(self.parent, "Error", str(ex))
         else:
-            QMessageBox.information(self.parent, PROGRAM_NAME, "No old log files found.", QMessageBox.StandardButton.Ok)
-
-
-class LogViewer(QDialog):
-    
-    def __init__(self, parent):
-        super(LogViewer, self).__init__(parent)
-        self.layout = QVBoxLayout()
-        self.setLayout(self.layout)
-        self.init_ui()
-        self.init_buttons()
-        self.load_log_content()
-
-    def init_ui(self):
-        self.setWindowTitle(log_file_name)
-        self.resize(400, 300)
-        self.editor = QTextEdit(self)
-        self.layout.addWidget(self.editor)
-
-    def init_buttons(self):
-        buttons_layout = QHBoxLayout()
-        clear_button = QPushButton("Clear")
-        clear_button.clicked.connect(lambda: self.editor.clear())
-        buttons_layout.addWidget(clear_button)
-
-        close_button = QPushButton("Close")
-        close_button.clicked.connect(lambda: self.close())
-        buttons_layout.addWidget(close_button)
-        self.layout.addLayout(buttons_layout)
-
-    def load_log_content(self):
-        log = open(log_file, mode="r", encoding="utf-8")
-        self.editor.setPlainText(log.read())
-        log.close()
+            show_info_dialog(self.parent, PROGRAM_NAME, "No old log files found.")
