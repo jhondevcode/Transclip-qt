@@ -6,6 +6,7 @@ functions to display dialog.
 from PyQt6.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QHBoxLayout
 from PyQt6.QtWidgets import QTextEdit, QPushButton
 from exceptions import UnsatisfiedResourceException
+from util import locale
 
 
 # noinspection PyAttributeOutsideInit
@@ -34,12 +35,12 @@ class TextDialog(QDialog):
 
     def init_buttons(self):
         buttons_layout = QHBoxLayout()
-        self.clear_button = QPushButton("Clear")
+        self.clear_button = QPushButton(locale.value("CLEAR"))
         self.clear_button.clicked.connect(lambda: self.editor.clear())
         self.clear_button.setEnabled(False)
         buttons_layout.addWidget(self.clear_button)
 
-        close_button = QPushButton("Close")
+        close_button = QPushButton(locale.value("CLOSE"))
         close_button.clicked.connect(self.close)
         buttons_layout.addWidget(close_button)
         self.layout.addLayout(buttons_layout)
