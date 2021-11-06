@@ -1,0 +1,66 @@
+$menu-bar: #2F2F2F;
+$border: #666666;
+$disable: #8f8f8f;
+$entered: #375980;
+$item-pressed: #888888;
+$ocean: #2F65CA;
+$white: #FFFFFF;
+$window: #3C3F41;
+$editor: #2B2B2B;
+
+QDialog {
+    background-color: $window;
+}
+
+QLabel {
+    color: $white;
+}
+
+QMainWindow {
+    background-color: $window;
+}
+
+QMenuBar {
+    background-color: $menu-bar;
+    color: $white;
+}
+
+QMenuBar::item:pressed {
+    background: $item-pressed;
+}
+
+QMenuBar::item:selected {
+    border-bottom: 2px solid $entered;
+}
+
+QMenu {
+    background-color: $window;
+    border: 0.5px solid $border;
+}
+
+QMenu::item:selected {
+    background-color: $ocean;
+}
+
+QMenu::item:enabled {
+    color: $white;
+}
+
+QMenu::item:disabled {
+    color: $disable;
+}
+
+QMessageBox {
+    background-color: $window;
+}
+
+QPushButton {
+    background-color: $entered;
+    color: $white;
+}
+
+QTextEdit {
+    background-color: $editor;
+    color: $white;
+    font-size: 15px;
+}
