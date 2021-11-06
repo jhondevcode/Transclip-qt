@@ -1,19 +1,20 @@
-from PyQt6.QtWidgets import QApplication, QMainWindow, QMenuBar, QMessageBox
-from PyQt6.QtWidgets import QDialog, QTextEdit, QPushButton, QLabel, QWidget
-from PyQt6.QtWidgets import QHBoxLayout, QVBoxLayout
-from PyQt6.QtGui import QIcon, QCloseEvent, QFont, QPixmap
-
-from constant import PROGRAM_NAME, PROGRAM_VERSION, PROGRAM_URL
 from os import listdir, remove
 from os.path import isfile, join
-from impl import Requester
-from util import browse
 from typing import List
-from logger import logger, LOG_DIR, log_file, log_file_name
+
+from PyQt6.QtGui import QIcon, QCloseEvent
+from PyQt6.QtWidgets import QApplication, QMainWindow, QMenuBar, QMessageBox
+from PyQt6.QtWidgets import QHBoxLayout, QVBoxLayout
+from PyQt6.QtWidgets import QTextEdit, QLabel, QWidget
+
 from clipboard import clear
-from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog
-from util import locale
 from config import config
+from constant import PROGRAM_NAME, PROGRAM_VERSION, PROGRAM_URL
+from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog
+from impl import Requester
+from logger import logger, LOG_DIR, log_file, log_file_name
+from util import browse
+from util import locale
 
 
 class MainWindow(QMainWindow, Requester):
