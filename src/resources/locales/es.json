@@ -21,7 +21,7 @@
   "MENU_BAR_HELP_HELP": "Ayuda",
   "EXIT_DIALOG_TITLE": "Confirmar salida",
   "EXIT_DIALOG_MESSAGE": "¿Estás seguro de que quieres salir?",
-  "CLEAR_LOG_DIALOG_TITLE": "Confirmar elimincación",
+  "CLEAR_LOG_DIALOG_TITLE": "Confirmar eliminación",
   "CLEAR_LOG_DIALOG_MESSAGE": "¿Está seguro de que desea eliminar los archivos de registro antiguos?",
   "CLEAR_LOG_DIALOG_NOT_FOUND": "No se encontraron archivos de registro antiguos",
   "CLEAR_LOG_DIALOG_SUCCESS": "Los registros antiguos se han borrado",
