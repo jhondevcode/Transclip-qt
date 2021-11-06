@@ -3,8 +3,8 @@ This module provides widgets to display information in text boxes as well as
 functions to display dialog.
 """
 
-from PyQt6.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QHBoxLayout
-from PyQt6.QtWidgets import QTextEdit, QPushButton
+from PyQt5.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import QTextEdit, QPushButton
 from exceptions import UnsatisfiedResourceException
 from util import locale
 

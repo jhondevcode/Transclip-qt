@@ -2,10 +2,10 @@ from os import listdir, remove
 from os.path import isfile, join
 from typing import List
 
-from PyQt6.QtGui import QIcon, QCloseEvent
-from PyQt6.QtWidgets import QApplication, QMainWindow, QMenuBar, QMessageBox
-from PyQt6.QtWidgets import QHBoxLayout, QVBoxLayout
-from PyQt6.QtWidgets import QTextEdit, QLabel, QWidget
+from PyQt5.QtGui import QIcon, QCloseEvent
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QMessageBox
+from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QTextEdit, QLabel, QWidget
 
 from clipboard import clear
 from config import config
@@ -152,7 +152,7 @@ class MenuBar(QMenuBar):
         self.setting_action.setShortcut("Ctrl+Shift+S")
 
     def init_help_menu(self):
-        self.help_menu = self.addMenu("&Help")
+        self.help_menu = self.addMenu(locale.value("MENU_BAR_HELP"))
         self.help_action = self.help_menu.addAction(QIcon("resources/svg/help_icon.svg"), locale.value("MENU_BAR_HELP"))
         self.help_action.setShortcut("Ctrl+Shift+H")
 

@@ -1,5 +1,5 @@
-from PyQt6.QtGui import QDesktopServices
-from PyQt6.QtCore import QUrl
+from PyQt5.QtGui import QDesktopServices
+from PyQt5.QtCore import QUrl
 from config import config
 from json import load
 
