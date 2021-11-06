@@ -39,7 +39,6 @@ class MainWindow(QMainWindow, Requester):
         x_point: int = (screen_width - window_width) // 2
         y_point: int = (screen_height - window_height) // 2
         self.setGeometry(x_point, y_point, window_width, window_height)
-        self.setMinimumSize(window_width, window_height)
 
     def init_ui(self):
         self.init_menu_bar()
@@ -55,6 +54,12 @@ class MainWindow(QMainWindow, Requester):
         self.setCentralWidget(self.central_widget)
         self.central_layout = QVBoxLayout()
         self.central_widget.setLayout(self.central_layout)
+        self.source_text_edit = None
+        if config.get("show-source") == "True":
+            self.source_text_edit = QTextEdit()
+            self.central_layout.addWidget(self.source_text_edit)
+        self.target_text_edit = QTextEdit()
+        self.central_layout.addWidget(self.target_text_edit)
 
     def init_status_bar(self):
         self.state_bar = StateBar()
@@ -71,6 +76,22 @@ class MainWindow(QMainWindow, Requester):
             event.accept()
         else:
             event.ignore()
+
+    def set_source_text(self, text: str):
+        if self.source_text_edit is not None:
+            self.source_text_edit.setPlainText(text)
+
+    def set_target_text(self, text: str):
+        self.target_text_edit.setPlainText(text)
+
+    def set_words_counter(self, words: int):
+        self.state_bar.set_words(words)
+
+    def set_network_state(self, state: bool):
+        if state:
+            self.state_bar.set_state(locale.value("STATE_LABEL_ON"))
+        else:
+            self.state_bar.set_state(locale.value("STATE_LABEL_OFF"))
 
 
 class MenuBar(QMenuBar):
