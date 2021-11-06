@@ -31,9 +31,11 @@ QMenu {
 QMenu::item:selected {
     background-color: #2F65CA;
 }
+
 QMenu::item:enabled {
     color: #FFFFFF;
 }
+
 QMenu::item:disabled {
     color: #8f8f8f;
 }
