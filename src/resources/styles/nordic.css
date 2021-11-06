@@ -1,0 +1,52 @@
+QDialog {
+    background-color: #3B4252;
+}
+
+QLabel {
+    color: #FFFFFF;
+}
+
+QMainWindow {
+    background-color: #3B4252;
+}
+
+QMenu {
+    background-color: #3B4252;
+    border: 0.5px solid #666666;
+}
+
+QMenu::item:selected {
+    background-color: #81A1C1;
+}
+
+QMenu::item:enabled {
+    color: #FFFFFF;
+}
+
+QMenu::item:disabled {
+    color: #8f8f8f;
+}
+
+QMenuBar {
+    background-color: #232831;
+    color: white;
+}
+
+QMenuBar::item:pressed {
+    background: #81A1C1;
+}
+
+QMessageBox {
+    background-color: #2E3442;
+}
+
+QPushButton {
+    background-color: #2E3442;
+    color: #FFFFFF;
+}
+
+QTextEdit {
+    background-color: #2E3440;
+    color: #FFFFFF;
+    font-size: 15px;
+}
