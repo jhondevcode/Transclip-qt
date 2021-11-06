@@ -1,0 +1,63 @@
+QDialog {
+    background-color: #181811;
+}
+
+QLabel {
+    color: #FFFFFF;
+}
+
+QMainWindow {
+    background-color: #181811;
+}
+
+QMenuBar {
+    background-color: #2B2A13;
+    color: #FFFFFF;
+}
+
+QMenuBar::item:pressed {
+    background: #3C3C1E;
+}
+
+QMenuBar::item:selected {
+    border-bottom: 2px solid #A77700;
+}
+
+QMenu {
+    background-color: #181811;
+    border: 0.5px solid #666666;
+}
+
+QMenu::item:selected {
+    background-color: #B8860B;
+}
+
+QMenu::item:enabled {
+    color: #FFFFFF;
+}
+
+QMenu::item:disabled {
+    color: #8f8f8f;
+}
+
+QMessageBox {
+    background-color: #181811;
+}
+
+QPushButton:enabled {
+    background-color: #B8860B;
+    color: #3F361E;
+    font-size: 13px;
+}
+
+QPushButton:disabled {
+    background-color: #B8860B;
+    color: #919191;
+    font-size: 13px;
+}
+
+QTextEdit {
+    background-color: #212117;
+    color: white;
+    font-size: 15px;
+}
