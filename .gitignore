@@ -12,6 +12,9 @@ pyvenv.cfg
 # Visual studio code files
 .vscode/
 
+# css map
+*.css.map
+
 # files resulting from construction
 src/bin/
 src/build/
