@@ -2,7 +2,7 @@
 This module contains widgets to manipulate the various settings of the program.
 """
 
-from PyQt6.QtWidgets import QDialog, QFontDialog, QColorDialog
+from PyQt5.QtWidgets import QDialog
 
 
 class SettingsAssistant(QDialog):

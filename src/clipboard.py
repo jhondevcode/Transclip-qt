@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QClipboard
+from PyQt5.QtWidgets import QApplication
 
 
 def copy(content: str):

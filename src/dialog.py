@@ -5,6 +5,7 @@ functions to display dialog.
 
 from PyQt5.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QHBoxLayout
 from PyQt5.QtWidgets import QTextEdit, QPushButton
+
 from exceptions import UnsatisfiedResourceException
 from util import locale
 

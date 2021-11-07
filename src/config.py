@@ -1,15 +1,16 @@
 """
 """
 
-from impl import AbstractLoader
-from homedir import get_home_path
-from os.path import join, isfile
-from logger import logger
 import sqlite3 as sql
+from os.path import join, isfile
+
+from homedir import get_home_path
+from impl import AbstractLoader
+from logger import logger
 
 
 class Configuration(AbstractLoader):
-    
+
     def __init__(self):
         super(Configuration, self).__init__()
         self.__config = {}

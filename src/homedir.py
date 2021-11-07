@@ -4,9 +4,9 @@ making available functionalities to create files and directories
 as required by the program process.
 """
 
-from pathlib import Path
 from os import mkdir
 from os.path import isdir, join
+from pathlib import Path
 
 
 def build_path(owner: str, internal: list) -> str:

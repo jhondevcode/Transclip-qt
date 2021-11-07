@@ -1,6 +1,7 @@
 import datetime
 import logging
 import os
+
 from homedir import get_home_path
 
 LOG_DIR = os.path.join(get_home_path(), "logs")

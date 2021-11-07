@@ -1,7 +1,9 @@
-from PyQt5.QtGui import QDesktopServices
-from PyQt5.QtCore import QUrl
-from config import config
 from json import load
+
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QDesktopServices
+
+from config import config
 
 
 class LocaleUtil:
