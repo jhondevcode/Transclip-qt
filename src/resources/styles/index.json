@@ -1,7 +1,7 @@
 {
-  "Code": "code.css",
-  "Dark": "dark.scss",
-  "Nordic": "nordic.css",
-  "Sunset": "sunset.css",
-  "Yaru": "yaru.css"
+  "Code": "css/code.css",
+  "Dark": "css/dark.scss",
+  "Nordic": "css/nordic.css",
+  "Sunset": "css/sunset.css",
+  "Yaru": "css/yaru.css"
 }
