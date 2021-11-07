@@ -11,3 +11,9 @@ pyvenv.cfg
 
 # Visual studio code files
 .vscode/
+
+# files resulting from construction
+src/bin/
+src/build/
+src/dist/
+src/transclip.spec
