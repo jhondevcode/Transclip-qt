@@ -1,93 +1,94 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1024"
-   height="1024"
-   viewBox="0 0 1024 1024"
-   version="1.1"
-   id="svg14"
-   sodipodi:docname="play_icon.svg"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
-  <metadata
-     id="metadata20">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>play_circle_filled</dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs18" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1366"
-     inkscape:window-height="703"
-     id="namedview16"
-     showgrid="false"
-     showguides="true"
-     inkscape:guide-bbox="true"
-     inkscape:zoom="0.1767767"
-     inkscape:cx="347.12065"
-     inkscape:cy="658.32913"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg14">
-    <sodipodi:guide
-       position="511.99609,-0.2890625"
-       orientation="1,0"
-       id="guide42"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="0.08984375,512"
-       orientation="0,1"
-       id="guide44"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
-  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
-  <title
-     id="title2">play_circle_filled</title>
-  <desc
-     id="desc4">Created with Sketch.</desc>
-  <circle
-     style="fill:#00c800;fill-opacity:1;stroke:none;stroke-width:5.50884676;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="path22"
-     cx="512"
-     cy="511.99997"
-     r="512" />
-  <path
-     sodipodi:type="star"
-     style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="path40"
-     sodipodi:sides="3"
-     sodipodi:cx="604.19946"
-     sodipodi:cy="509.41812"
-     sodipodi:r1="179.98691"
-     sodipodi:r2="89.993454"
-     sodipodi:arg1="2.1086319"
-     sodipodi:arg2="3.1558295"
-     inkscape:flatsided="false"
-     inkscape:rounded="0"
-     inkscape:randomized="0"
-     d="m 511.99607,663.99438 2.21906,-155.85744 2.21906,-155.85743 133.86697,79.85048 133.86697,79.85048 -136.08603,76.00696 z"
-     inkscape:transform-center-x="6.1205006"
-     inkscape:transform-center-y="-20.211555"
-     transform="matrix(1.4805825,-0.02542258,0.01955872,1.924474,-406.89537,-453.35753)" />
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:cc="http://creativecommons.org/ns#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+        width="1024"
+        height="1024"
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        id="svg14"
+        sodipodi:docname="play_icon.svg"
+        inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
+    <metadata
+            id="metadata20">
+        <rdf:RDF>
+            <cc:Work
+                    rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                        rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                <dc:title>play_circle_filled</dc:title>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <defs
+            id="defs18"/>
+    <sodipodi:namedview
+            pagecolor="#ffffff"
+            bordercolor="#666666"
+            borderopacity="1"
+            objecttolerance="10"
+            gridtolerance="10"
+            guidetolerance="10"
+            inkscape:pageopacity="0"
+            inkscape:pageshadow="2"
+            inkscape:window-width="1366"
+            inkscape:window-height="703"
+            id="namedview16"
+            showgrid="false"
+            showguides="true"
+            inkscape:guide-bbox="true"
+            inkscape:zoom="0.1767767"
+            inkscape:cx="347.12065"
+            inkscape:cy="658.32913"
+            inkscape:window-x="0"
+            inkscape:window-y="0"
+            inkscape:window-maximized="1"
+            inkscape:current-layer="svg14">
+        <sodipodi:guide
+                position="511.99609,-0.2890625"
+                orientation="1,0"
+                id="guide42"
+                inkscape:locked="false"/>
+        <sodipodi:guide
+                position="0.08984375,512"
+                orientation="0,1"
+                id="guide44"
+                inkscape:locked="false"/>
+    </sodipodi:namedview>
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title
+            id="title2">play_circle_filled
+    </title>
+    <desc
+            id="desc4">Created with Sketch.
+    </desc>
+    <circle
+            style="fill:#00c800;fill-opacity:1;stroke:none;stroke-width:5.50884676;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+            id="path22"
+            cx="512"
+            cy="511.99997"
+            r="512"/>
+    <path
+            sodipodi:type="star"
+            style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+            id="path40"
+            sodipodi:sides="3"
+            sodipodi:cx="604.19946"
+            sodipodi:cy="509.41812"
+            sodipodi:r1="179.98691"
+            sodipodi:r2="89.993454"
+            sodipodi:arg1="2.1086319"
+            sodipodi:arg2="3.1558295"
+            inkscape:flatsided="false"
+            inkscape:rounded="0"
+            inkscape:randomized="0"
+            d="m 511.99607,663.99438 2.21906,-155.85744 2.21906,-155.85743 133.86697,79.85048 133.86697,79.85048 -136.08603,76.00696 z"
+            inkscape:transform-center-x="6.1205006"
+            inkscape:transform-center-y="-20.211555"
+            transform="matrix(1.4805825,-0.02542258,0.01955872,1.924474,-406.89537,-453.35753)"/>
 </svg>
