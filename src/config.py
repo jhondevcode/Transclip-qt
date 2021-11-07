@@ -72,4 +72,6 @@ class Configuration(AbstractLoader):
         self.__config[key] = value
 
 
-config = Configuration()
+config = None
+if config is None:
+    config = Configuration()
