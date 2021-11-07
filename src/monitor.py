@@ -46,7 +46,7 @@ class Monitor(QThread, AbstractMonitor):
             clipboard_content = paste()
             if clipboard_content is not None and len(clipboard_content) > 0:
                 clipboard_content = self.formatter.format(clipboard_content)
-                self.words.emit(len(clipboard_content))
+                self.words.emit(len(clipboard_content.split(" ")))
                 if clipboard_content != old_text:
                     old_text = self.invoke_translate(clipboard_content, old_text)
                 else:
