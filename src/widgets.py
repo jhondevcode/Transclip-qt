@@ -2,7 +2,7 @@ from os import listdir, remove
 from os.path import isfile, join
 from typing import List
 
-from PyQt5.QtGui import QIcon, QCloseEvent
+from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QMessageBox
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
 from PyQt5.QtWidgets import QTextEdit, QLabel, QWidget
@@ -13,8 +13,7 @@ from constant import PROGRAM_NAME, PROGRAM_VERSION, PROGRAM_URL
 from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog
 from impl import Requester
 from logger import logger, LOG_DIR, log_file, log_file_name
-from util import browse
-from util import locale
+from util import browse, locale, svg_loader
 
 
 class MainWindow(QMainWindow, Requester):
@@ -28,7 +27,7 @@ class MainWindow(QMainWindow, Requester):
 
     def init_window(self):
         self.setWindowTitle(f"{PROGRAM_NAME} {PROGRAM_VERSION}")
-        self.setWindowIcon(QIcon("resources/svg/favicon.svg"))
+        svg_loader.load("favicon", self.setWindowIcon)
         self.start_window_dimensions()
         self.init_ui()
 
@@ -172,30 +171,30 @@ class MenuBar(QMenuBar):
 
     def init_file_menu(self):
         self.file_menu = self.addMenu(locale.value("MENU_BAR_FILE"))
-        self.open_action = self.file_menu.addAction(QIcon("resources/svg/open_icon.svg"),
-                                                    locale.value("MENU_BAR_FILE_OPEN"))
+        self.open_action = self.file_menu.addAction(locale.value("MENU_BAR_FILE_OPEN"))
+        svg_loader.load("open_icon", self.open_action.setIcon)
         self.open_action.setShortcut("Ctrl+O")
 
-        self.save_action = self.file_menu.addAction(QIcon("resources/svg/save_icon.svg"),
-                                                    locale.value("MENU_BAR_FILE_SAVE"))
+        self.save_action = self.file_menu.addAction(locale.value("MENU_BAR_FILE_SAVE"))
+        svg_loader.load("save_icon", self.save_action.setIcon)
         self.save_action.setShortcut("Ctrl+S")
         self.file_menu.addSeparator()
 
-        self.exit_action = self.file_menu.addAction(QIcon("resources/svg/exit_icon.svg"),
-                                                    locale.value("MENU_BAR_FILE_EXIT"))
+        self.exit_action = self.file_menu.addAction(locale.value("MENU_BAR_FILE_EXIT"))
+        svg_loader.load("exit_icon", self.exit_action.setIcon)
         self.exit_action.setShortcut("Ctrl+Q")
         self.exit_action.triggered.connect(self.parent.close)
 
     def init_run_menu(self):
         self.run_menu = self.addMenu(locale.value("MENU_BAR_RUN"))
-        self.start_monitor_action = self.run_menu.addAction(QIcon("resources/svg/start_icon.svg"),
-                                                            locale.value("MENU_BAR_RUN_START_MONITOR"))
+        self.start_monitor_action = self.run_menu.addAction(locale.value("MENU_BAR_RUN_START_MONITOR"))
+        svg_loader.load("start_icon", self.start_monitor_action.setIcon)
         self.start_monitor_action.setShortcut("Ctrl+Shift+T")
         self.start_monitor_action.triggered.connect(
             lambda: self.parent.start_button_action((self.start_monitor_action, self.stop_monitor_action)))
 
-        self.stop_monitor_action = self.run_menu.addAction(QIcon("resources/svg/stop_icon.svg"),
-                                                           locale.value("MENU_BAR_RUN_STOP_MONITOR"))
+        self.stop_monitor_action = self.run_menu.addAction(locale.value("MENU_BAR_RUN_STOP_MONITOR"))
+        svg_loader.load("stop_icon", self.stop_monitor_action.setIcon)
         self.stop_monitor_action.setShortcut("Ctrl+Shift+P")
         self.stop_monitor_action.setEnabled(False)
         self.stop_monitor_action.triggered.connect(
@@ -203,8 +202,8 @@ class MenuBar(QMenuBar):
 
     def init_tools_menu(self):
         self.tools_menu = self.addMenu(locale.value("MENU_BAR_TOOLS"))
-        self.logs_menu = self.tools_menu.addMenu(QIcon("resources/svg/log_icon.svg"),
-                                                 locale.value("MENU_BAR_TOOLS_LOGS"))
+        self.logs_menu = self.tools_menu.addMenu(locale.value("MENU_BAR_TOOLS_LOGS"))
+        svg_loader.load("log_icon", self.logs_menu.setIcon)
 
         self.show_log_action = self.logs_menu.addAction(locale.value("MENU_BAR_TOOLS_LOGS_SHOW"))
         self.show_log_action.setShortcut("Shift+L")
@@ -225,23 +224,24 @@ class MenuBar(QMenuBar):
         self.clipboard_clear_action = self.clipboard_menu.addAction(locale.value("MENU_BAR_TOOLS_CLIPBOARD_CLEAR"))
         self.clipboard_clear_action.triggered.connect(clear)
 
-        self.setting_action = self.tools_menu.addAction(QIcon("resources/svg/settings_icon.svg"),
-                                                        locale.value("MENU_BAR_TOOLS_SETTINGS"))
+        self.setting_action = self.tools_menu.addAction(locale.value("MENU_BAR_TOOLS_SETTINGS"))
+        svg_loader.load("settings_icon", self.setting_action.setIcon)
         self.setting_action.setShortcut("Ctrl+Shift+S")
 
     def init_help_menu(self):
         self.help_menu = self.addMenu(locale.value("MENU_BAR_HELP"))
-        self.help_action = self.help_menu.addAction(QIcon("resources/svg/help_icon.svg"), locale.value("MENU_BAR_HELP"))
+        self.help_action = self.help_menu.addAction(locale.value("MENU_BAR_HELP"))
+        svg_loader.load("help_icon", self.help_action.setIcon)
         self.help_action.setShortcut("Ctrl+Shift+H")
 
-        self.github_action = self.help_menu.addAction(QIcon("resources/svg/github_icon.svg"),
-                                                      locale.value("MENU_BAR_HELP_GITHUB"))
+        self.github_action = self.help_menu.addAction(locale.value("MENU_BAR_HELP_GITHUB"))
+        svg_loader.load("github_icon", self.github_action.setIcon)
         self.github_action.triggered.connect(lambda: browse(PROGRAM_URL))
         self.github_action.setShortcut("Ctrl+Shift+G")
         self.help_menu.addSeparator()
 
-        self.about_action = self.help_menu.addAction(QIcon("resources/svg/about_icon.svg"),
-                                                     locale.value("MENU_BAR_HELP_ABOUT"))
+        self.about_action = self.help_menu.addAction(locale.value("MENU_BAR_HELP_ABOUT"))
+        svg_loader.load("about_icon", self.about_action.setIcon)
         self.about_action.setShortcut("Ctrl+Shift+A")
 
     def __delete_old_logs(self):
