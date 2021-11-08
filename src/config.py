@@ -2,7 +2,10 @@
 """
 
 import sqlite3 as sql
+import sys
 from os.path import join, isfile
+
+from requests import get
 
 from homedir import get_home_path
 from impl import AbstractLoader
@@ -45,12 +48,28 @@ class Configuration(AbstractLoader):
 
     def load_default(self):
         # loading default configuration
-        default = open("resources/other/default_config.txt")
-        lines = default.readlines()
-        default.close()
-        for line in lines:
-            pair = line.replace("\n", "").split("=")
-            self.__config[pair[0]] = pair[1]
+        try:
+            default = open("resources/other/default_config.txt")
+            lines = default.readlines()
+            default.close()
+            for line in lines:
+                pair = line.replace("\n", "").split("=")
+                self.__config[pair[0]] = pair[1]
+        except Exception as ex:
+            logger.error(ex)
+            try:
+                # loading default configuration from github
+                data = get("https://raw.githubusercontent.com/jhondevcode/Transclip-qt/master/src/resources/other/default_config.txt")
+                lines = data.content.decode("utf-8")
+                data.close()
+                lines = lines.split("\n")
+                del lines[-1]
+                for pair in lines:
+                    p = pair.split("=")
+                    self.__config[p[0]] = p[1]
+            except Exception as ex:
+                logger.error(ex)
+                sys.exit(-1)
 
     def save(self):
         try:
