@@ -4,20 +4,23 @@ import setproctitle as spt
 from PyQt5.QtWidgets import QApplication
 
 from clipboard import clear
-from config import config
 from constant import PROGRAM_NAME
+from logger import logger
 from widgets import MainWindow
+from util import load_style
 
 
 def main():
-    spt.setproctitle(PROGRAM_NAME)
-    app = QApplication(sys.argv)
-    clear()
-    with open(f"resources/styles/{config.get('style')}", mode="r", encoding="utf-8") as stylesheet:
-        app.setStyleSheet(stylesheet.read())
-    window = MainWindow(app)
-    window.show()
-    sys.exit(app.exec())
+    try:
+        spt.setproctitle(PROGRAM_NAME)
+        app = QApplication(sys.argv)
+        clear()
+        load_style(app.setStyleSheet)
+        window = MainWindow(app)
+        window.show()
+        sys.exit(app.exec())
+    except Exception as ex:
+        logger.error(ex)
 
 
 if __name__ == "__main__":
