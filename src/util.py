@@ -65,6 +65,15 @@ if locale is None:
     locale = LocaleUtil()
 
 
+def load_style(function):
+    resources = config.get("resources").replace("${CURRENT}", getcwd()).replace("${HOME}", get_home_path())
+    style = join(join(resources, "styles"), config.get("style"))
+    if isfile(style):
+        with open(style, mode="r", encoding="utf-8") as stylesheet:
+            function(stylesheet.read())
+        logger.info("Stylesheet found in:", style)
+
+
 def browse(url: str):
     """
         This function uses the Qt core to open a url in the system's
