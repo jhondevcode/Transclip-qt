@@ -2,5 +2,6 @@ locale=en.json
 source=es
 target=en
 interval=0.5
+resources=${CURRENT}/resources
 show-source=True
 style=css/white.css
