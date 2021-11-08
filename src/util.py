@@ -45,12 +45,18 @@ class LocaleUtil:
     def __init__(self):
         self.dictionary = None
         try:
-            file_path = f"resources/locales/{config.get('locale')}"
-            file = open(file_path, mode="r", encoding="utf-8")
-            self.dictionary = load(file)
-            file.close()
+            resources = config.get("resources").replace("${CURRENT}", getcwd()).replace("${HOME}", get_home_path())
+            file_path = f"{resources}/locales/{config.get('locale')}"
+            if isfile(file_path):
+                file = open(file_path, mode="r", encoding="utf-8")
+                self.dictionary = load(file)
+                file.close()
         except Exception as ex:
             logger.error(ex)
+            self.__load_remote_locale()
+
+    def __load_remote_locale(self):
+        pass
 
     def value(self, key: str) -> str:
         return self.dictionary[key] if self.dictionary is not None else "unknown"
