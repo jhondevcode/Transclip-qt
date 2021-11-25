@@ -1,7 +1,40 @@
-locale=en.json
-source=es
-target=en
-interval=0.5
-resources=${CURRENT}/resources
-show-source=True
-style=css/white.css
+# Set the clipboard monitoring interval
+monitor.interval=0.5
+
+# Indicates the display of the original text box
+editext.source.view=True
+
+# Indicates the display of the translated text box
+editext.target.view=True
+
+# Indicates the size of the letters in the text boxes
+editext.font.size=12
+
+# Sets the hexadecimal color of the letters in the text boxes
+#
+# This property may vary according to the theme, to enable the
+# color change the lower property must be set to false
+editext.font.color=#000000
+
+# It establishes if the color of the letters will be according
+# to the theme or a static color
+editext.font.color.automatic=True
+
+# Indicates the name of the dictionary that the program will use
+transclip.locale=en.json
+
+# Indicates the path in which the resource folder is located
+transclip.resources.path=${CURRENT}/resources
+
+# Indicates the url of the resource folder.
+# This is used by the program in case it cannot locate the resources on the system
+transclip.resources.url=https://raw.githubusercontent.com/jhondevcode/Transclip-qt/master/src/resources/
+
+# Sets the style file with which the program will start
+transclip.style=css/white.css
+
+# Set the source of the translator
+translator.source=es
+
+# Set the target of the translator
+translator.target=en
