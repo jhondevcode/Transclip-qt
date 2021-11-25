@@ -56,7 +56,7 @@ class MainWindow(QMainWindow, Requester):
         self.central_layout = QVBoxLayout()
         self.central_widget.setLayout(self.central_layout)
         self.source_text_edit = None
-        if config.get("show-source") == "True":
+        if config.get("editext.source.view") == "True":
             self.source_text_edit = QTextEdit()
             self.central_layout.addWidget(self.source_text_edit)
         self.target_text_edit = QTextEdit()
@@ -66,10 +66,10 @@ class MainWindow(QMainWindow, Requester):
         self.state_bar = StateBar()
         self.central_layout.addLayout(self.state_bar)
         self.state_bar.set_state(locale.value("STATE_LABEL_OFF"))
-        self.state_bar.set_source(config.get("source"))
-        self.state_bar.set_target(config.get("target"))
+        self.state_bar.set_source(config.get("translator.source"))
+        self.state_bar.set_target(config.get("translator.target"))
         self.state_bar.set_words(0)
-        self.state_bar.set_delay(float(config.get("interval")))
+        self.state_bar.set_delay(float(config.get("monitor.interval")))
 
     def closeEvent(self, event: QCloseEvent) -> None:
         quit_message = show_question_dialog(self, locale.value("EXIT_DIALOG_TITLE"),

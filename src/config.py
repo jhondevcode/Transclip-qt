@@ -46,15 +46,26 @@ class Configuration(AbstractLoader):
             logger.error(ex)
             self.load_default()
 
+    def register_configs(self, stream: list):
+        """
+            This method is in charge of processing and validating the content
+            of the properties file
+        """
+        for line in stream:
+            if (line != '\n' or line[0] != '#') and '=' in line:
+                try:
+                    key, value = line.replace("\n", "").split("=")
+                    self.__config[key] = value
+                except ValueError as ex:
+                    logger.error(ex)
+
     def load_default(self):
         # loading default configuration
         try:
             default = open("resources/other/default_config.txt")
             lines = default.readlines()
             default.close()
-            for line in lines:
-                pair = line.replace("\n", "").split("=")
-                self.__config[pair[0]] = pair[1]
+            self.register_configs(lines)
         except Exception as ex:
             logger.error(ex)
             try:
@@ -64,9 +75,7 @@ class Configuration(AbstractLoader):
                 data.close()
                 lines = lines.split("\n")
                 del lines[-1]
-                for pair in lines:
-                    p = pair.split("=")
-                    self.__config[p[0]] = p[1]
+                self.register_configs(lines)
             except Exception as ex:
                 logger.error(ex)
                 sys.exit(-1)

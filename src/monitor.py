@@ -23,9 +23,9 @@ class Monitor(QThread, AbstractMonitor):
         QThread.__init__(self)
         AbstractMonitor.__init__(self)
         self.owner = owner
-        self.interval_time = config.get("interval")
+        self.interval_time = config.get("monitor.interval")
         self.formatter = PlainTextFormatter()
-        self.translator = PlainTextTranslator(config.get("source"), config.get("target"))
+        self.translator = PlainTextTranslator(config.get("translator.source"), config.get("translator.target"))
 
     def invoke_translate(self, actual: str, old: str):
         self.source.emit(actual)
