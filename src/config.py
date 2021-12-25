@@ -94,19 +94,39 @@ class Configuration(AbstractLoader):
             logger.error(ex)
 
     def get(self, key: str):
-        return self.__config[key]
+        try:
+            return self.__config[key]
+        except KeyError as err:
+            logger.error(err)
+            return None
     
     def get_bool(self, key: str) -> bool:
-        return True if self.get(key) == 'True' else False
+        try:
+            return True if self.get(key) == 'True' else False
+        except Exception as err:
+            logger.error(err)
+            return False
 
     def get_float(self, key: str) -> float:
-        return float(self.get(key))
+        try:
+            return float(self.get(key))
+        except Exception as err:
+            logger.error(err)
+            return 0.0
 
     def get_int(self, key: str) -> int:
-        return int(self.get(key))
+        try:
+            return int(self.get(key))
+        except Exception as err:
+            logger.error(err)
+            return 0
 
     def get_string(self, key: str) -> str:
-        return str(self.get(key))
+        try:
+            return str(self.get(key))
+        except Exception as err:
+            logger.error(err)
+            return ""
 
     def set(self, key: str, value: str):
         self.__config[key] = value
