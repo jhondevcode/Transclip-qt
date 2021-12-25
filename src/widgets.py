@@ -13,6 +13,7 @@ from constant import PROGRAM_NAME, PROGRAM_VERSION, PROGRAM_URL
 from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog
 from impl import Requester
 from logger import logger, LOG_DIR, log_file, log_file_name
+from settings import show_settings_dialog
 from util import browse, locale, svg_loader
 
 
@@ -227,6 +228,7 @@ class MenuBar(QMenuBar):
         self.setting_action = self.tools_menu.addAction(locale.value("MENU_BAR_TOOLS_SETTINGS"))
         svg_loader.load("settings_icon", self.setting_action.setIcon)
         self.setting_action.setShortcut("Ctrl+Shift+S")
+        self.setting_action.triggered.connect(lambda: show_settings_dialog(self))
 
     def init_help_menu(self):
         self.help_menu = self.addMenu(locale.value("MENU_BAR_HELP"))
