@@ -84,7 +84,7 @@ class Configuration(AbstractLoader):
         try:
             connection = sql.connect(join(get_home_path(), "config.db"))
             cursor = connection.cursor()
-            cursor.execute("UPDATE config SET value")
+            # cursor.execute("UPDATE config SET value")
             for key, value in self.__config.items():
                 cursor.execute(f'UPDATE config SET value="{value}" WHERE key="{key}"')
             connection.commit()
