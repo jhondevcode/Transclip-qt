@@ -29,9 +29,22 @@ def load_remote_file(url: str):
         remote_file.close()
     return file_path
 
+def resources_path():
+    to_database = config.get_string('transclip.resources.path')
+    if '${CURRENT}' in to_database:
+        to_database = to_database.replace("${CURRENT}", getcwd())
+    elif '${HOME}' in to_database:
+        to_database =  to_database.replace("${HOME}", get_home_path())
+    
+    if to_database == "":
+        logger.error("No resources found")
+        sys.exit(-1)
+    
+    return to_database
+
 
 def load_style(function):
-    resources = config.get("transclip.resources.path").replace("${CURRENT}", getcwd()).replace("${HOME}", get_home_path())
+    resources = resources_path()
     style = join(join(resources, "styles"), config.get("transclip.style"))
     if isfile(style):
         with open(style, mode="r", encoding="utf-8") as stylesheet:
@@ -43,19 +56,7 @@ class ImageLoader:
 
     def __init__(self):
         super(ImageLoader, self).__init__()
-        self.image_dir = None
-        res_config: str = config.get("transclip.resources.path")
-        if "${HOME}" in res_config:
-            path = res_config.replace("${HOME}", get_home_path())
-            logger.info(f"Resources path: {path}")
-        elif "${CURRENT}" in res_config:
-            path = res_config.replace("${CURRENT}", getcwd())
-            logger.info(f"Resources path: {path}")
-        else:
-            path = None
-            logger.error("Not found resources path")
-        if path is not None:
-            self.image_dir = join(path, "svg")
+        self.image_dir = join(resources_path(), "svg")
 
     def load(self, name: str, function, object_type="icon"):
         if self.image_dir is not None and isfile(join(self.image_dir, f"{name}.svg")):
@@ -73,7 +74,7 @@ class LocaleUtil:
 
     def __init__(self):
         self.dictionary = None
-        resources = config.get("transclip.resources.path").replace("${CURRENT}", getcwd()).replace("${HOME}", get_home_path())
+        resources = resources_path()
         file_path = f"{resources}/locales/{config.get('transclip.locale')}"
         if isfile(file_path):
             print("Dictionary found in:", file_path)
