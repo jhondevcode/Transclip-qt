@@ -95,6 +95,18 @@ class Configuration(AbstractLoader):
 
     def get(self, key: str):
         return self.__config[key]
+    
+    def get_bool(self, key: str) -> bool:
+        return True if self.get(key) == 'True' else False
+
+    def get_float(self, key: str) -> float:
+        return float(self.get(key))
+
+    def get_int(self, key: str) -> int:
+        return int(self.get(key))
+
+    def get_string(self, key: str) -> str:
+        return str(self.get(key))
 
     def set(self, key: str, value: str):
         self.__config[key] = value
