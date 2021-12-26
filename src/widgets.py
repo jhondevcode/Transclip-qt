@@ -269,7 +269,7 @@ class MenuBar(QMenuBar):
                 try:
                     for fls in files:
                         to_remove = join(LOG_DIR, fls)
-                        if fls is not log_file_name and isfile(to_remove):
+                        if fls != log_file_name and isfile(to_remove):
                             remove(to_remove)
                             logger.warn(f"Deleting {to_remove}")
                     show_info_dialog(self.parent, locale.value("SUCCESSFUL_TITLE"),
