@@ -1,6 +1,7 @@
 from json import load
 from os import getcwd
 from os.path import isfile, join
+import sys
 
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QDesktopServices, QIcon, QBitmap, QImage
@@ -77,7 +78,7 @@ class LocaleUtil:
         resources = resources_path()
         file_path = f"{resources}/locales/{config.get('transclip.locale')}"
         if isfile(file_path):
-            print("Dictionary found in:", file_path)
+            logger.info(f"Dictionary found in: {file_path}")
             file = open(file_path, mode="r", encoding="utf-8")
             self.dictionary = load(file)
             file.close()
