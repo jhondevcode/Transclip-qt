@@ -6,6 +6,7 @@ functions to display dialog.
 from PyQt5.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QHBoxLayout
 from PyQt5.QtWidgets import QTextEdit, QPushButton
 
+from constant import PROGRAM_NAME
 from exceptions import UnsatisfiedResourceException
 from util import locale
 
@@ -60,6 +61,17 @@ class TextDialog(QDialog):
         file.close()
 
 
+class AboutDialog(QDialog):
+
+    def __init__(self, parent):
+        super(AboutDialog, self).__init__(parent)
+        self.setWindowTitle(f'About of {PROGRAM_NAME}')
+        self.center_dialog()
+
+    def center_dialog(self):
+        self.resize(round(self.parent().width() * 0.8), round(self.parent().height() * 0.8))
+
+
 def show_question_dialog(parent, title, message):
     buttons = QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
     return QMessageBox.question(parent, title, message, buttons, QMessageBox.StandardButton.Yes)
@@ -80,3 +92,7 @@ def show_warning_dialog(parent, title, message):
 
 def show_text_dialog(parent=None, file="", title="", buttons=False):
     TextDialog(parent=parent, file=file, title=title, buttons=buttons).exec()
+
+
+def show_about_dialog(parent=None):
+    AboutDialog(parent=parent).exec()
