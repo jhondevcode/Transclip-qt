@@ -8,7 +8,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 from clipboard import copy, paste
 from config import config
 from formatters import PlainTextFormatter
-from impl import AbstractMonitor
+from impl import AbstractMonitor, AbstractFormatter
 from logger import logger
 from translation import PlainTextTranslator
 from util import locale
@@ -27,12 +27,20 @@ class Monitor(QThread, AbstractMonitor):
         self.formatter = PlainTextFormatter()
         self.translator = PlainTextTranslator(config.get("translator.source"), config.get("translator.target"))
 
+    def set_interval_time(self, interval: int):
+        self.interval_time = interval
+        
+    def set_formatter(self, new_formatter: AbstractFormatter):
+        self.formatter = new_formatter
+        
+    def set_translator(self, new_translator):
+        self.translator = new_translator
+
     def invoke_translate(self, actual: str, old: str):
         self.source.emit(actual)
         self.target.emit(locale.value("TRANSLATING"))
         try:
             translated = self.translator.translate(actual)
-            self.target.emit(translated)
             copy(translated)
             return translated
         except Exception as ex:
@@ -45,10 +53,11 @@ class Monitor(QThread, AbstractMonitor):
         while self.is_running():
             clipboard_content = paste()
             if clipboard_content is not None and len(clipboard_content) > 0:
-                clipboard_content = self.formatter.format(clipboard_content)
-                self.words.emit(len(clipboard_content.split(" ")))
                 if clipboard_content != old_text:
+                    clipboard_content = self.formatter.format(clipboard_content)
                     old_text = self.invoke_translate(clipboard_content, old_text)
+                    self.words.emit(len(clipboard_content.split(" ")))
+                    self.target.emit(old_text)
                 else:
                     if old_text == "":
                         old_text = self.invoke_translate(clipboard_content, old_text)
