@@ -88,21 +88,21 @@ class AboutDialog(QDialog):
         title = QLabel(f'{PROGRAM_NAME} {PROGRAM_VERSION}')
         title.setAlignment(Qt.AlignCenter)
         header_layout.addWidget(title)
-        description = QLabel(PROGRAM_DESCRIPTION)
+        description = QLabel(locale.value("TRANSCLIP_DESCRIPTION"))
         description.setAlignment(Qt.AlignCenter)
         header_layout.addWidget(description)
         self.main_layout.addLayout(header_layout)
 
         tab_panel = QTabWidget()
         tab_panel.resize(round(self.width() * 0.9), round(self.height() * 0.5))
-        tab_panel.addTab(self.get_authors(), "Authors")
-        tab_panel.addTab(self.get_license(), "License")
+        tab_panel.addTab(self.get_authors(), locale.value("ABOUT_TAB_DEVELOPERS"))
+        tab_panel.addTab(self.get_license(), locale.value("ABOUT_TAB_LICENSE"))
         self.main_layout.addWidget(tab_panel)
 
     def get_authors(self):
         widget = QTextEdit()
         widget.setReadOnly(True)
-        text = "Developed by:\n\n"
+        text = f"{locale.value('ABOUT_TAB_BY')}\n\n"
         for author in AUTHORS:
             text += f"\t{author['name']}\n\t{author['email']}\n\t{author['github']}\n\n"
         widget.setText(text)
