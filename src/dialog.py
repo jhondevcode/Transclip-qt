@@ -3,12 +3,17 @@ This module provides widgets to display information in text boxes as well as
 functions to display dialog.
 """
 
-from PyQt5.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QHBoxLayout
-from PyQt5.QtWidgets import QTextEdit, QPushButton
+from os.path import join
 
-from constant import PROGRAM_NAME
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import QTextEdit, QPushButton, QLabel, QTabWidget
+
+from constant import PROGRAM_NAME, PROGRAM_DESCRIPTION, PROGRAM_VERSION
 from exceptions import UnsatisfiedResourceException
-from util import locale
+from util import locale, svg_loader, resources_path
+
+AUTHORS = [{'name': 'Jhon Fernandez', 'email': 'jhondev.code@gmail.com', 'github': 'github.com/jhondevcode'}]
 
 
 # noinspection PyAttributeOutsideInit
@@ -66,10 +71,50 @@ class AboutDialog(QDialog):
     def __init__(self, parent):
         super(AboutDialog, self).__init__(parent)
         self.setWindowTitle(f'About of {PROGRAM_NAME}')
+        self.main_layout = QVBoxLayout()
+        self.setLayout(self.main_layout)
         self.center_dialog()
+        self.init_ui()
 
     def center_dialog(self):
-        self.resize(round(self.parent().width() * 0.8), round(self.parent().height() * 0.8))
+        self.resize(round(self.parent().width() * 0.9), round(self.parent().height() * 0.8))
+
+    def init_ui(self):
+        header_layout = QVBoxLayout()
+        icon = QLabel()
+        svg_loader.load_scaled_pixmap('favicon', 64, 64, icon.setPixmap)
+        icon.setAlignment(Qt.AlignCenter)
+        header_layout.addWidget(icon)
+        title = QLabel(f'{PROGRAM_NAME} {PROGRAM_VERSION}')
+        title.setAlignment(Qt.AlignCenter)
+        header_layout.addWidget(title)
+        description = QLabel(PROGRAM_DESCRIPTION)
+        description.setAlignment(Qt.AlignCenter)
+        header_layout.addWidget(description)
+        self.main_layout.addLayout(header_layout)
+
+        tab_panel = QTabWidget()
+        tab_panel.resize(round(self.width() * 0.9), round(self.height() * 0.5))
+        tab_panel.addTab(self.get_authors(), "Authors")
+        tab_panel.addTab(self.get_license(), "License")
+        self.main_layout.addWidget(tab_panel)
+
+    def get_authors(self):
+        widget = QTextEdit()
+        widget.setReadOnly(True)
+        text = "Developed by:\n\n"
+        for author in AUTHORS:
+            text += f"\t{author['name']}\n\t{author['email']}\n\t{author['github']}\n\n"
+        widget.setText(text)
+        return widget
+
+    def get_license(self):
+        widget = QTextEdit()
+        widget.setReadOnly(True)
+        with open(join(join(resources_path(), "other"), "license.txt"), mode='r', encoding='utf-8') as license_file:
+            widget.setPlainText(license_file.read())
+        widget.setAlignment(Qt.AlignJustify)
+        return widget
 
 
 def show_question_dialog(parent, title, message):
