@@ -1,3 +1,4 @@
+from mimetypes import guess_type
 from os import listdir, remove
 from os.path import isfile, join
 from typing import List
@@ -252,9 +253,12 @@ class MenuBar(QMenuBar):
         text_file = QFileDialog.getOpenFileName(None, "Open text file", filter="txt (*.txt);; All files (*.*)")
         if len(text_file) > 0:
             if len(text_file[0]) > 0:
-                with open(text_file[0], mode='r', encoding='utf-8') as txt_file:
-                    # copy(txt_file.read())
-                    print(txt_file.readlines())
+                if guess_type(text_file[0])[0] == 'text/plain':
+                    with open(text_file[0], mode='r', encoding='utf-8') as txt_file:
+                        copy(txt_file.read())
+                else:
+                    show_error_dialog(self.parent, locale.value("OPEN_FILE_ERROR_TITLE"),
+                                      locale.value("OPEN_FILE_ERROR_MESSAGE"))
 
     def __delete_old_logs(self):
         files: List[str] = listdir(LOG_DIR)
