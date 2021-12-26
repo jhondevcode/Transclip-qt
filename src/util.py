@@ -3,8 +3,8 @@ from os import getcwd
 from os.path import isfile, join
 import sys
 
-from PyQt5.QtCore import QUrl
-from PyQt5.QtGui import QDesktopServices, QIcon, QBitmap, QImage
+from PyQt5.QtCore import QUrl, Qt
+from PyQt5.QtGui import QDesktopServices, QIcon, QBitmap, QImage, QPixmap
 from requests import get
 
 from config import config
@@ -29,6 +29,7 @@ def load_remote_file(url: str):
         data.close()
         remote_file.close()
     return file_path
+
 
 def resources_path():
     to_database = config.get_string('transclip.resources.path')
@@ -69,6 +70,12 @@ class ImageLoader:
                 function(QIcon(file_name))
             elif object_type == "image":
                 function(QImage(file_name))
+
+    def load_scaled_pixmap(self, name: str, width: int, height: int, function):
+        if self.image_dir is not None and isfile(join(self.image_dir, f"{name}.svg")):
+            file_name = join(self.image_dir, f"{name}.svg")
+            logger.info(f"Loading: {file_name}")
+            function(QPixmap(file_name).scaled(width, height, Qt.KeepAspectRatio))
 
 
 class LocaleUtil:
