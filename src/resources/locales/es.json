@@ -40,5 +40,7 @@
   "TRANSLATING": "traduciendo...",
   "SUCCESSFUL_TITLE": "Operación exitosa",
   "CLEAR": "Limpiar",
-  "CLOSE": "Cerrar"
+  "CLOSE": "Cerrar",
+  "OPEN_FILE_ERROR_TITLE": "Error al abrir archivo",
+  "OPEN_FILE_ERROR_MESSAGE": "El archivo seleccionado no es válido"
 }
