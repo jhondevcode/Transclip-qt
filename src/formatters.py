@@ -1,10 +1,6 @@
 from impl import AbstractFormatter
 
 
-def available_character(character: str):
-    return 48 <= ord(character) <= 57 or 65 <= ord(character) <= 122
-
-
 class PlainTextFormatter(AbstractFormatter):
     """Provides a formatter for plain texts, rearranging by paragraphs and removing strange characters from the text"""
 
@@ -12,23 +8,33 @@ class PlainTextFormatter(AbstractFormatter):
         """Default constructor"""
         super(PlainTextFormatter, self).__init__()
 
-    def format(self, text: str) -> str:
-        """Format text, clean up weird characters and rearrange it"""
-        old_text = text.replace("\r", "")
-        new_text = ""
-        counter = 0
-        for character in old_text:
-            if character == "-" and old_text[counter + 1] == "\n":
-                new_text += ""
+    def format(self, text: str):
+        text_fixed: str = text.replace('\r', '')
+        text_length: int = len(text)
+        character_string_counter: int = 0
+        character_string_buffer: list = []
+        # format engine
+        while character_string_counter < text_length:
+            current_character = text_fixed[character_string_counter]
+            if current_character == '-':
+                try:
+                    if text_fixed[character_string_counter + 1] == '\n':
+                        character_string_buffer.append('')
+                    else:
+                        character_string_buffer.append(current_character)
+                except IndexError:
+                    character_string_buffer.append(current_character)
+            elif current_character == '\n':
+                try:
+                    if text_fixed[character_string_counter - 1] == '.':
+                        character_string_buffer.append('\n\n')
+                    elif text_fixed[character_string_counter - 1] == '-':
+                        character_string_buffer.append('')
+                    else:
+                        character_string_buffer.append(' ')
+                except IndexError:
+                    character_string_buffer.append(current_character)
             else:
-                if character == "\n":
-                    if old_text[counter - 1] == ".":
-                        new_text += "\n\n"
-                    elif old_text[counter - 1] == ":":
-                        new_text += "\n"
-                    if old_text[counter + 1] == " ":
-                        new_text += "  "
-                else:
-                    new_text += character
-            counter += 1
-        return new_text
+                character_string_buffer.append(current_character)
+            character_string_counter += 1
+        return "".join(character_string_buffer)
