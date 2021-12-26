@@ -42,5 +42,9 @@
   "CLEAR": "Clear",
   "CLOSE": "Close",
   "OPEN_FILE_ERROR_TITLE": "Error opening file",
-  "OPEN_FILE_ERROR_MESSAGE": "The selected file is invalid"
+  "OPEN_FILE_ERROR_MESSAGE": "The selected file is invalid",
+  "ABOUT_TAB_DEVELOPERS": "Developers",
+  "ABOUT_TAB_BY": "Developed by",
+  "ABOUT_TAB_LICENSE": "License",
+  "TRANSCLIP_DESCRIPTION": "A small utility to translate clipboard content"
 }

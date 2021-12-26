@@ -42,5 +42,9 @@
   "CLEAR": "Limpiar",
   "CLOSE": "Cerrar",
   "OPEN_FILE_ERROR_TITLE": "Error al abrir archivo",
-  "OPEN_FILE_ERROR_MESSAGE": "El archivo seleccionado no es válido"
+  "OPEN_FILE_ERROR_MESSAGE": "El archivo seleccionado no es válido",
+  "ABOUT_TAB_DEVELOPERS": "Desarrolladores",
+  "ABOUT_TAB_BY": "Desarrollado por:",
+  "ABOUT_TAB_LICENSE": "Licencia",
+  "TRANSCLIP_DESCRIPTION": "Una pequeña utilidad para traducir el contenido del portapapeles"
 }
