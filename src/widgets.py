@@ -5,12 +5,12 @@ from typing import List
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QMessageBox
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
-from PyQt5.QtWidgets import QTextEdit, QLabel, QWidget
+from PyQt5.QtWidgets import QTextEdit, QLabel, QWidget, QFileDialog
 
-from clipboard import clear
+from clipboard import clear, copy
 from config import config
 from constant import PROGRAM_NAME, PROGRAM_VERSION, PROGRAM_URL
-from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog
+from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog, show_about_dialog
 from impl import Requester
 from logger import logger, LOG_DIR, log_file, log_file_name
 from settings import show_settings_dialog
@@ -175,6 +175,7 @@ class MenuBar(QMenuBar):
         self.open_action = self.file_menu.addAction(locale.value("MENU_BAR_FILE_OPEN"))
         svg_loader.load("open_icon", self.open_action.setIcon)
         self.open_action.setShortcut("Ctrl+O")
+        self.open_action.triggered.connect(self.read_text_file)
 
         self.save_action = self.file_menu.addAction(locale.value("MENU_BAR_FILE_SAVE"))
         svg_loader.load("save_icon", self.save_action.setIcon)
@@ -245,6 +246,15 @@ class MenuBar(QMenuBar):
         self.about_action = self.help_menu.addAction(locale.value("MENU_BAR_HELP_ABOUT"))
         svg_loader.load("about_icon", self.about_action.setIcon)
         self.about_action.setShortcut("Ctrl+Shift+A")
+        self.about_action.triggered.connect(lambda: show_about_dialog(self.parent))
+
+    def read_text_file(self):
+        text_file = QFileDialog.getOpenFileName(None, "Open text file", filter="txt (*.txt);; All files (*.*)")
+        if len(text_file) > 0:
+            if len(text_file[0]) > 0:
+                with open(text_file[0], mode='r', encoding='utf-8') as txt_file:
+                    # copy(txt_file.read())
+                    print(txt_file.readlines())
 
     def __delete_old_logs(self):
         files: List[str] = listdir(LOG_DIR)
