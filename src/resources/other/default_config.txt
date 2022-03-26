@@ -1,5 +1,5 @@
 # Set the clipboard monitoring interval
-monitor.interval=0.5
+monitor.interval=0.2
 
 # Indicates the display of the original text box
 editext.source.view=True
@@ -31,10 +31,10 @@ transclip.resources.path=${CURRENT}/resources
 transclip.resources.url=https://raw.githubusercontent.com/jhondevcode/Transclip-qt/master/src/resources/
 
 # Sets the style file with which the program will start
-transclip.style=css/white.css
+transclip.style=css/dark.css
 
 # Set the source of the translator
-translator.source=es
+translator.source=en
 
 # Set the target of the translator
-translator.target=en
+translator.target=es
