@@ -1,6 +1,7 @@
 from json import load
 from os import getcwd
 from os.path import isfile, join
+from typing import Dict
 import sys
 
 from PyQt5.QtCore import QUrl, Qt
@@ -46,12 +47,23 @@ def resources_path():
 
 
 def load_style(function):
-    resources = resources_path()
-    style = join(join(resources, "styles"), config.get("transclip.style"))
-    if isfile(style):
-        with open(style, mode="r", encoding="utf-8") as stylesheet:
-            function(stylesheet.read())
-        logger.info(f"Stylesheet found in: {style}")
+    style_name = config.get("transclip.theme")
+    if style_name is not None and style_name != 'System default':
+        theme_list = join(resources_path(), "styles", "index.json")
+        themes = {}
+        if isfile(theme_list):
+            with open(theme_list, mode="r", encoding="utf-8") as theme_file:
+                themes = load(theme_file)
+        if style_name in themes:
+            style = join(resources_path(), "styles", themes[style_name])
+            if isfile(style):
+                with open(style, mode="r", encoding="utf-8") as stylesheet:
+                    function(stylesheet.read())
+                logger.info(f"Stylesheet found in: {style}")
+        else:
+            logger.warn("Stylesheet not found for" + style_name + " theme")
+    else:
+        logger.warn("Loading default system style")
 
 
 class ImageLoader:
@@ -82,8 +94,8 @@ class LocaleUtil:
 
     def __init__(self):
         self.dictionary = None
-        resources = resources_path()
-        file_path = f"{resources}/locales/{config.get('transclip.locale')}"
+        self.available_locales = self.list_locales()
+        file_path = join(resources_path(), "locales", self._get_safe_locale())
         if isfile(file_path):
             logger.info(f"Dictionary found in: {file_path}")
             file = open(file_path, mode="r", encoding="utf-8")
@@ -91,7 +103,7 @@ class LocaleUtil:
             file.close()
         else:
             file_path = load_remote_file(f"https://raw.githubusercontent.com/jhondevcode/Transclip-qt/master/src"
-                                         f"/resources/locales/{config.get('transclip.locale')}")
+                                         f"/resources/locales/{self._get_safe_locale()}")
             logger.info(f"Dictionary downloaded from: {file_path}")
             file = open(file=file_path, mode="r", encoding="utf-8")
             try:
@@ -101,7 +113,19 @@ class LocaleUtil:
             file.close()
 
     def value(self, key: str) -> str:
-        return self.dictionary[key] if self.dictionary is not None else "unknown"
+        return self.dictionary[key] if self.dictionary is not None and key in self.dictionary else "unknown"
+
+    def list_locales(self) -> Dict[str, str]:
+        list_file = join(resources_path(), "locales", "index.json")
+        locale_dict = {}
+        if isfile(list_file):
+            with open(list_file, mode="r", encoding="utf-8") as data_list:
+                locale_dict = load(data_list)
+        return locale_dict
+
+    def _get_safe_locale(self):
+        config_locale = config.get('transclip.locale')
+        return self.available_locales[config_locale] if config_locale in self.available_locales else "en.json"
 
 
 svg_loader = None
