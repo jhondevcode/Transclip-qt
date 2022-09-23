@@ -46,5 +46,20 @@
   "ABOUT_TAB_DEVELOPERS": "Desarrolladores",
   "ABOUT_TAB_BY": "Desarrollado por:",
   "ABOUT_TAB_LICENSE": "Licencia",
-  "TRANSCLIP_DESCRIPTION": "Una pequeña utilidad para traducir el contenido del portapapeles"
+  "TRANSCLIP_DESCRIPTION": "Una pequeña utilidad para traducir el contenido del portapapeles",
+  "TRANSCLIP_SETTINGS_TITLE": "Configuraciones",
+  "TRANSCLIP_LOCALE_LANG": "Idioma",
+  "TRANSCLIP_GLOBAL_THEME": "Tema",
+  "TRANSCLIP_SAVE": "Guardar",
+  "TRANSCLIP_CANCEL": "Cancelar",
+  "TRANSCLIP_SECONDS": "Segundos",
+  "TRANSCLIP_ABOUT_TITLE": "Acerca de",
+  "TRANSCLIP_CONTINUE": "Continuar",
+  "TRANSCLIP_WARNING": "Advertencia",
+  "TRANSCLIP_UNCHANGED": "No hay cambios para guardar",
+  "TRANSCLIP_UNSAVED_CHANGES": "¿Está seguro de que desea continuar sin guardar los cambios?",
+  "TRANSCLIP_SAVE_ERROR_TITLE": "Error inesperado",
+  "TRANSCLIP_SAVE_ERROR_MESSAGE": "No se puede guardar los cambios",
+  "TRANSCLIP_SAVE_SUCCESS_TITLE": "Cambios guardados",
+  "TRANSCLIP_SAVE_SUCCESS_MESSAGE": "Los cambios se guardaron correctamente!"
 }
