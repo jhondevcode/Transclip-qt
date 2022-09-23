@@ -4,6 +4,7 @@
 from time import sleep
 
 from PyQt5.QtCore import QThread, pyqtSignal
+from deep_translator.constants import GOOGLE_LANGUAGES_TO_CODES
 
 from clipboard import copy, paste
 from config import config
@@ -25,7 +26,8 @@ class Monitor(QThread, AbstractMonitor):
         self.owner = owner
         self.interval_time = config.get("monitor.interval")
         self.formatter = PlainTextFormatter()
-        self.translator = PlainTextTranslator(config.get("translator.source"), config.get("translator.target"))
+        self.translator = PlainTextTranslator(self._get_safe_lang_key(config.get("translator.source")),
+                                              self._get_safe_lang_key(config.get("translator.target")))
 
     def set_interval_time(self, interval: int):
         self.interval_time = interval
@@ -71,3 +73,6 @@ class Monitor(QThread, AbstractMonitor):
         super().stop_monitoring()
         if not self.isRunning() and self.isFinished():
             self.exit(0)
+
+    def _get_safe_lang_key(self, lang: str):
+        return GOOGLE_LANGUAGES_TO_CODES[lang] if lang in GOOGLE_LANGUAGES_TO_CODES else "auto"
