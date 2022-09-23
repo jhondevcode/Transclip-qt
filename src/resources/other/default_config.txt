@@ -8,7 +8,7 @@ editext.source.view=True
 editext.target.view=True
 
 # Indicates the size of the letters in the text boxes
-editext.font.size=12
+editext.font.size=15
 
 # Sets the hexadecimal color of the letters in the text boxes
 #
@@ -21,7 +21,7 @@ editext.font.color=#000000
 editext.font.color.automatic=True
 
 # Indicates the name of the dictionary that the program will use
-transclip.locale=en.json
+transclip.locale=English
 
 # Indicates the path in which the resource folder is located
 transclip.resources.path=${CURRENT}/resources
@@ -31,10 +31,10 @@ transclip.resources.path=${CURRENT}/resources
 transclip.resources.url=https://raw.githubusercontent.com/jhondevcode/Transclip-qt/master/src/resources/
 
 # Sets the style file with which the program will start
-transclip.style=css/dark.css
+transclip.theme=Dark
 
 # Set the source of the translator
-translator.source=en
+translator.source=english
 
 # Set the target of the translator
-translator.target=es
+translator.target=spanish
