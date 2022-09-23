@@ -3,6 +3,7 @@
 
 import sqlite3 as sql
 import sys
+from typing import Dict
 from os.path import join, isfile
 
 from requests import get
@@ -17,6 +18,7 @@ class Configuration(AbstractLoader):
     def __init__(self):
         super(Configuration, self).__init__()
         self.__config = {}
+        self._to_save: Dict[str, str] = {}
         self.load()
 
     def load(self):
@@ -80,18 +82,39 @@ class Configuration(AbstractLoader):
                 logger.error(ex)
                 sys.exit(-1)
 
-    def save(self):
-        try:
-            connection = sql.connect(join(get_home_path(), "config.db"))
-            cursor = connection.cursor()
-            # cursor.execute("UPDATE config SET value")
-            for key, value in self.__config.items():
-                cursor.execute(f'UPDATE config SET value="{value}" WHERE key="{key}"')
-            connection.commit()
-            cursor.close()
-            connection.close()
-        except Exception as ex:
-            logger.error(ex)
+    def save(self) -> bool:
+        have_error = False
+        connection = None
+        cursor = None
+        if len(self._to_save):
+            try:
+                connection = sql.connect(join(get_home_path(), "config.db"))
+                cursor = connection.cursor()
+                # cursor.execute("UPDATE config SET value")
+
+                for key, value in self._to_save.items():
+                    try:
+                        cursor.execute(f'UPDATE config SET value="{value}" WHERE key="{key}"')
+                    except Exception as ex:
+                        logger.error(ex)
+                        connection.rollback()
+                        have_error = True
+                        break
+                connection.commit()
+                # cursor.close()
+                # connection.close()
+            except Exception as ex:
+                logger.error(ex)
+                have_error = True
+                if connection:
+                    connection.rollback()
+            finally:
+                if cursor:
+                    cursor.close()
+
+                if connection:
+                    connection.close()
+        return have_error
 
     def get(self, key: str):
         try:
@@ -130,6 +153,12 @@ class Configuration(AbstractLoader):
 
     def set(self, key: str, value: str):
         self.__config[key] = value
+
+    def clean_to_save(self):
+        self._to_save.clear()
+
+    def add_to_save(self, key: str, value: str):
+        self._to_save[key] = value
 
 
 config = None
