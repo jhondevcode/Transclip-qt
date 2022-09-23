@@ -46,5 +46,20 @@
   "ABOUT_TAB_DEVELOPERS": "Developers",
   "ABOUT_TAB_BY": "Developed by",
   "ABOUT_TAB_LICENSE": "License",
-  "TRANSCLIP_DESCRIPTION": "A small utility to translate clipboard content"
+  "TRANSCLIP_DESCRIPTION": "A small utility to translate clipboard content",
+  "TRANSCLIP_SETTINGS_TITLE": "Settings",
+  "TRANSCLIP_LOCALE_LANG": "Language",
+  "TRANSCLIP_GLOBAL_THEME": "Theme",
+  "TRANSCLIP_SAVE": "Save",
+  "TRANSCLIP_CANCEL": "Cancel",
+  "TRANSCLIP_SECONDS": "Seconds",
+  "TRANSCLIP_ABOUT_TITLE": "About of",
+  "TRANSCLIP_CONTINUE": "Continue",
+  "TRANSCLIP_WARNING": "Warning",
+  "TRANSCLIP_UNCHANGED": "No changes to save",
+  "TRANSCLIP_UNSAVED_CHANGES": "Are you sure you want to continue without saving changes?",
+  "TRANSCLIP_SAVE_ERROR_TITLE": "Unexpected error",
+  "TRANSCLIP_SAVE_ERROR_MESSAGE": "Unable to save changes",
+  "TRANSCLIP_SAVE_SUCCESS_TITLE": "Changes saved",
+  "TRANSCLIP_SAVE_SUCCESS_MESSAGE": "Changes saved successfully!"
 }
