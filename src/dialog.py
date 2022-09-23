@@ -70,14 +70,15 @@ class AboutDialog(QDialog):
 
     def __init__(self, parent):
         super(AboutDialog, self).__init__(parent)
-        self.setWindowTitle(f'About of {PROGRAM_NAME}')
+        self.setWindowTitle(locale.value("TRANSCLIP_ABOUT_TITLE") + " " + PROGRAM_NAME)
         self.main_layout = QVBoxLayout()
         self.setLayout(self.main_layout)
         self.center_dialog()
         self.init_ui()
 
     def center_dialog(self):
-        self.resize(round(self.parent().width() * 0.9), round(self.parent().height() * 0.8))
+        # self.resize(round(self.parent().width() * 0.9), round(self.parent().height() * 0.8))
+        self.resize(600, 300)
 
     def init_ui(self):
         header_layout = QVBoxLayout()
@@ -122,7 +123,7 @@ def show_question_dialog(parent, title, message):
     return QMessageBox.question(parent, title, message, buttons, QMessageBox.StandardButton.Yes)
 
 
-def show_error_dialog(parent, title, message):
+def show_error_dialog(parent, title="Error", message="Error message"):
     return QMessageBox.critical(parent, title, message, QMessageBox.StandardButton.Ok, QMessageBox.StandardButton.Ok)
 
 
@@ -130,9 +131,12 @@ def show_info_dialog(parent, title, message):
     return QMessageBox.information(parent, title, message, QMessageBox.StandardButton.Ok, QMessageBox.StandardButton.Ok)
 
 
-def show_warning_dialog(parent, title, message):
-    buttons = QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-    return QMessageBox.warning(parent, title, message, buttons, QMessageBox.StandardButton.Yes)
+def show_warning_dialog(parent, title, message, buttons=True):
+    if buttons:
+        buttons = QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+        return QMessageBox.warning(parent, title, message, buttons, QMessageBox.StandardButton.Yes)
+    else:
+        return QMessageBox.warning(parent, title, message, QMessageBox.StandardButton.Ok, QMessageBox.StandardButton.Ok)
 
 
 def show_text_dialog(parent=None, file="", title="", buttons=False):
