@@ -221,6 +221,7 @@ class MenuBar(QMenuBar):
         self.clear_logs_action.triggered.connect(self.__delete_old_logs)
 
         self.clipboard_menu = self.tools_menu.addMenu(locale.value("MENU_BAR_TOOLS_CLIPBOARD"))
+        svg_loader.load("clipboard", self.clipboard_menu.setIcon)
 
         self.clipboard_history_action = self.clipboard_menu.addAction(locale.value("MENU_BAR_TOOLS_CLIPBOARD_HISTORY"))
 
