@@ -2,14 +2,16 @@
 This module contains widgets to manipulate the various settings of the program.
 """
 from PyQt5.QtGui import QCloseEvent
-from PyQt5.QtWidgets import QDialog, QComboBox, QPushButton, QLabel, QDoubleSpinBox, QMessageBox
+from PyQt5.QtWidgets import QComboBox, QPushButton, QLabel, QDoubleSpinBox, QToolButton, QLineEdit
+from PyQt5.QtWidgets import QDialog, QMessageBox, QFileDialog
 from PyQt5.QtWidgets import QGridLayout, QVBoxLayout, QHBoxLayout
 
 from os.path import join, isfile
 from json import load
 from config import config
 from dialog import show_question_dialog, show_warning_dialog, show_error_dialog, show_info_dialog
-from util import locale, resources_path
+from logger import logger
+from util import locale, resources_path, svg_loader
 from deep_translator.constants import GOOGLE_LANGUAGES_TO_CODES
 
 
@@ -21,7 +23,7 @@ class SettingsAssistant(QDialog):
         super(SettingsAssistant, self).__init__(parent)
         self.setWindowTitle(locale.value("TRANSCLIP_SETTINGS_TITLE"))
         # self.resize(300, 200)
-        self.setFixedSize(300, 200)
+        self.setFixedSize(350, 250)
 
         self.dialog_layout = QVBoxLayout()
         self.setLayout(self.dialog_layout)
@@ -56,6 +58,9 @@ class SettingsAssistant(QDialog):
         self.widgets_layout.addWidget(QLabel(locale.value("TRANSCLIP_ORIGINAL_TEXT")), 5, 0)
         self.widgets_layout.addWidget(self._get_source_options(), 5, 1)
 
+        self.widgets_layout.addWidget(QLabel(locale.value("TRANSCLIP_RESOURCE_PATH")), 6, 0)
+        self.widgets_layout.addLayout(self._get_resources_path(), 6, 1)
+
     def start_settings_option(self):
         foot_layout = QHBoxLayout()
 
@@ -78,6 +83,7 @@ class SettingsAssistant(QDialog):
             config.add_to_save(key="transclip.locale", value=self.locale_combo.currentText())
             config.add_to_save(key="transclip.theme", value=self.theme_combo.currentText())
             config.add_to_save(key="editext.source.view", value="True" if self.text_source_combo.currentText() == locale.value("TRANSCLIP_YES_OPTION") else "False")
+            config.add_to_save(key="transclip.resources.path", value=self.resources_path_input.text())
             save_state: bool = config.save()
             if not save_state:  # Checking not error occurred
                 show_info_dialog(self, title=locale.value("TRANSCLIP_SAVE_SUCCESS_TITLE"),
@@ -155,6 +161,27 @@ class SettingsAssistant(QDialog):
             self.text_source_combo.setDisabled(True)
         return self.text_source_combo
 
+    def _get_resources_path(self) -> QHBoxLayout:
+        widgets_layout = QHBoxLayout()
+        self.resources_path_input = QLineEdit()
+        self.resources_path_input.setText(resources_path())
+        self.resources_path_input.setReadOnly(True)
+        widgets_layout.addWidget(self.resources_path_input)
+
+        change_button = QToolButton()
+        svg_loader.load("search", change_button.setIcon)
+        change_button.setToolTip(locale.value("TRANSCLIP_RESOURCE_TOOLTIP"))
+        change_button.clicked.connect(self._change_resources_location)
+        widgets_layout.addWidget(change_button)
+        return widgets_layout
+
+    def _change_resources_location(self):
+        new_resources_location = QFileDialog.getExistingDirectory(self, caption=locale.value("TRANSCLIP_SELECT_FOLDER"), directory=resources_path())
+        if new_resources_location != "":
+            self.resources_path_input.setText(new_resources_location)
+        else:
+            logger.warn("New location is empty")
+
     def _have_changes(self) -> bool:
         source_changed = config.get("translator.source") != self.source_combo.currentText()
         target_changed = config.get("translator.target") != self.target_combo.currentText()
@@ -162,7 +189,8 @@ class SettingsAssistant(QDialog):
         lang_changed = config.get("transclip.locale") != self.locale_combo.currentText()
         theme_changed = config.get("transclip.theme") != self.theme_combo.currentText()
         source_view_changed = config.get("editext.source.view") != ("True" if self.text_source_combo.currentText() == locale.value("TRANSCLIP_YES_OPTION") else "False")
-        return source_changed or target_changed or delay_changed or lang_changed or theme_changed or source_view_changed
+        resources_dir_changed = resources_path() != self.resources_path_input.text()
+        return source_changed or target_changed or delay_changed or lang_changed or theme_changed or source_view_changed or resources_dir_changed
 
     def closeEvent(self, event: QCloseEvent) -> None:
         if self._have_changes():
