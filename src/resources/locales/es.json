@@ -52,6 +52,8 @@
   "TRANSCLIP_GLOBAL_THEME": "Tema",
   "TRANSCLIP_ORIGINAL_TEXT": "Ver texto original",
   "TRANSCLIP_RESOURCE_PATH": "Recursos",
+  "TRANSCLIP_RESOURCE_TOOLTIP": "Cambiar ubicación",
+  "TRANSCLIP_SELECT_FOLDER": "Seleccionar directorio",
   "TRANSCLIP_YES_OPTION": "Si",
   "TRANSCLIP_NO_OPTION": "No",
   "TRANSCLIP_OK_OPTION": "Aceptar",
@@ -66,5 +68,5 @@
   "TRANSCLIP_SAVE_ERROR_TITLE": "Error inesperado",
   "TRANSCLIP_SAVE_ERROR_MESSAGE": "No se puede guardar los cambios",
   "TRANSCLIP_SAVE_SUCCESS_TITLE": "Cambios guardados",
-  "TRANSCLIP_SAVE_SUCCESS_MESSAGE": "Los cambios se guardaron correctamente!"
+  "TRANSCLIP_SAVE_SUCCESS_MESSAGE": "Los cambios se mostrarán en el siguiente inicio del programa"
 }
