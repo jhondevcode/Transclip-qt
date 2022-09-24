@@ -53,6 +53,9 @@ class SettingsAssistant(QDialog):
         self.widgets_layout.addWidget(QLabel(locale.value("TRANSCLIP_GLOBAL_THEME")), 4, 0)
         self.widgets_layout.addWidget(self._get_themes(), 4, 1)
 
+        self.widgets_layout.addWidget(QLabel(locale.value("TRANSCLIP_ORIGINAL_TEXT")), 5, 0)
+        self.widgets_layout.addWidget(self._get_source_options(), 5, 1)
+
     def start_settings_option(self):
         foot_layout = QHBoxLayout()
 
@@ -74,6 +77,7 @@ class SettingsAssistant(QDialog):
             config.add_to_save(key="monitor.interval", value=self.delay_selector.text())
             config.add_to_save(key="transclip.locale", value=self.locale_combo.currentText())
             config.add_to_save(key="transclip.theme", value=self.theme_combo.currentText())
+            config.add_to_save(key="editext.source.view", value="True" if self.text_source_combo.currentText() == locale.value("TRANSCLIP_YES_OPTION") else "False")
             save_state: bool = config.save()
             if not save_state:  # Checking not error occurred
                 show_info_dialog(self, title=locale.value("TRANSCLIP_SAVE_SUCCESS_TITLE"),
@@ -140,13 +144,25 @@ class SettingsAssistant(QDialog):
             self.locale_combo.setDisabled(True)
         return self.locale_combo
 
+    def _get_source_options(self) -> QComboBox:
+        self.text_source_combo = QComboBox()
+        current_option = config.get("editext.source.view")
+        if current_option is not None:
+            options = [locale.value("TRANSCLIP_YES_OPTION"), locale.value("TRANSCLIP_NO_OPTION")]
+            self.text_source_combo.addItems(options)
+            self.text_source_combo.setCurrentIndex(0 if current_option == 'True' else 1)
+        else:
+            self.text_source_combo.setDisabled(True)
+        return self.text_source_combo
+
     def _have_changes(self) -> bool:
         source_changed = config.get("translator.source") != self.source_combo.currentText()
         target_changed = config.get("translator.target") != self.target_combo.currentText()
         delay_changed = config.get("monitor.interval") != self.delay_selector.text()
         lang_changed = config.get("transclip.locale") != self.locale_combo.currentText()
         theme_changed = config.get("transclip.theme") != self.theme_combo.currentText()
-        return source_changed or target_changed or delay_changed or lang_changed or theme_changed
+        source_view_changed = config.get("editext.source.view") != ("True" if self.text_source_combo.currentText() == locale.value("TRANSCLIP_YES_OPTION") else "False")
+        return source_changed or target_changed or delay_changed or lang_changed or theme_changed or source_view_changed
 
     def closeEvent(self, event: QCloseEvent) -> None:
         if self._have_changes():
