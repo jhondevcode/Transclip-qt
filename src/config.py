@@ -64,7 +64,7 @@ class Configuration(AbstractLoader):
     def load_default(self):
         # loading default configuration
         try:
-            default = open("resources/other/default_config.txt")
+            default = open("resources/other/default.properties")
             lines = default.readlines()
             default.close()
             self.register_configs(lines)
@@ -72,7 +72,7 @@ class Configuration(AbstractLoader):
             logger.error(ex)
             try:
                 # loading default configuration from github
-                data = get("https://raw.githubusercontent.com/jhondevcode/Transclip-qt/master/src/resources/other/default_config.txt")
+                data = get("https://raw.githubusercontent.com/jhondevcode/Transclip-qt/master/src/resources/other/default.properties")
                 lines = data.content.decode("utf-8")
                 data.close()
                 lines = lines.split("\n")
