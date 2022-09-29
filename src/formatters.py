@@ -10,7 +10,7 @@ class PlainTextFormatter(AbstractFormatter):
 
     def format(self, text: str):
         text_fixed: str = text.replace('\r', '')
-        text_length: int = len(text)
+        text_length: int = len(text_fixed)
         character_string_counter: int = 0
         character_string_buffer: list = []
         # format engine
