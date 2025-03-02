@@ -9,9 +9,9 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QMessageBox, QVBoxLayout, QHBoxLayout
 from PyQt5.QtWidgets import QTextEdit, QPushButton, QLabel, QTabWidget
 
-from constant import PROGRAM_NAME, PROGRAM_DESCRIPTION, PROGRAM_VERSION
-from exceptions import UnsatisfiedResourceException
-from util import locale, svg_loader, resources_path
+from transclip.constant import PROGRAM_NAME, PROGRAM_DESCRIPTION, PROGRAM_VERSION
+from transclip.exceptions import UnsatisfiedResourceException
+from transclip.util import locale, svg_loader, resources_path
 
 AUTHORS = [{'name': 'Jhon Fernandez', 'email': 'jhondev.code@gmail.com', 'github': 'github.com/jhondevcode'}]
 

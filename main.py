@@ -3,11 +3,11 @@ import sys
 import setproctitle as spt
 from PyQt5.QtWidgets import QApplication
 
-from clipboard import clear
-from constant import PROGRAM_NAME
-from logger import logger
-from widgets import MainWindow
-from util import load_style
+from transclip.clipboard import clear
+from transclip.constant import PROGRAM_NAME
+from transclip.logger import logger
+from transclip.widgets import MainWindow
+from transclip.util import load_style
 
 
 def main():

@@ -8,14 +8,14 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QMessageBox
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
 from PyQt5.QtWidgets import QTextEdit, QLabel, QWidget, QFileDialog
 
-from clipboard import clear, copy
-from config import config
-from constant import PROGRAM_NAME, PROGRAM_VERSION, PROGRAM_URL
-from dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog, show_about_dialog
-from impl import Requester
-from logger import logger, LOG_DIR, log_file, log_file_name
-from settings import show_settings_dialog
-from util import browse, locale, svg_loader
+from transclip.clipboard import clear, copy
+from transclip.config import config
+from transclip.constant import PROGRAM_NAME, PROGRAM_VERSION, PROGRAM_URL
+from transclip.dialog import show_text_dialog, show_question_dialog, show_info_dialog, show_error_dialog, show_about_dialog
+from transclip.impl import Requester
+from transclip.logger import logger, LOG_DIR, log_file, log_file_name
+from transclip.settings import show_settings_dialog
+from transclip.util import browse, locale, svg_loader
 
 
 class MainWindow(QMainWindow, Requester):

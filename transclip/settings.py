@@ -8,11 +8,12 @@ from PyQt5.QtWidgets import QGridLayout, QVBoxLayout, QHBoxLayout
 
 from os.path import join, isfile
 from json import load
-from config import config
-from dialog import show_question_dialog, show_warning_dialog, show_error_dialog, show_info_dialog
-from logger import logger
-from util import locale, resources_path, svg_loader
 from deep_translator.constants import GOOGLE_LANGUAGES_TO_CODES
+
+from transclip.config import config
+from transclip.dialog import show_question_dialog, show_warning_dialog, show_error_dialog, show_info_dialog
+from transclip.logger import logger
+from transclip.util import locale, resources_path, svg_loader
 
 
 # noinspection PyAttributeOutsideInit

@@ -8,9 +8,9 @@ from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtGui import QDesktopServices, QIcon, QBitmap, QImage, QPixmap
 from requests import get
 
-from config import config
-from homedir import get_home_path, create_dir
-from logger import logger
+from transclip.config import config
+from transclip.homedir import get_home_path, create_dir
+from transclip.logger import logger
 
 
 def browse(url: str):

@@ -8,9 +8,9 @@ from os.path import join, isfile
 
 from requests import get
 
-from homedir import get_home_path
-from impl import AbstractLoader
-from logger import logger
+from transclip.homedir import get_home_path
+from transclip.impl import AbstractLoader
+from transclip.logger import logger
 
 
 class Configuration(AbstractLoader):
