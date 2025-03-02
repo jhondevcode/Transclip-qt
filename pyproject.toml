@@ -1,6 +1,6 @@
 [project]
 name = "transclip"
-version = "0.1.0"
+version = "1.0.0"
 description = ""
 authors = [
     {name = "jhondevcode",email = "jhondev.code@gmail.com"}
